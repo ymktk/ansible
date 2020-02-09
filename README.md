@@ -12,8 +12,12 @@ ansible --version
 # Syntax check
 ansible-playbook -i inventory playbook.yml --syntax-check
 
+# Task list
+ansible-playbook -i inventory playbook.yml --list-tasks
+
 # Run
-ansible-playbook -i inventory playbook.yml
+# -vvv 詳細情報の表示及び、実行結果をJSONで返す
+ansible-playbook -i inventory playbook.yml -vvv
 
 ```
 
