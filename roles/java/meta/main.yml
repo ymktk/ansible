@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: java
   author: Takahiro Yamaki
   description: Java for CentOS
   company: Weekend Developer
