@@ -3,6 +3,21 @@
 ```bash
 
 ansible --version
+python3 -V
+pip3 -V
+
+
+cd /path/to/demo1/
+
+# Syntax check
+ansible-playbook -i inventory playbook.yml --syntax-check
+
+# Task list
+ansible-playbook -i inventory playbook.yml --list-tasks
+
+# Run
+# -vvv 詳細情報の表示及び、実行結果をJSONで返す
+ansible-playbook -i inventory playbook.yml -vvv
 
 
 ```
