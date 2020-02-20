@@ -1,0 +1,15 @@
+---
+# tasks file for jenkins-master
+- name: Add yum repository
+  get_url:
+    url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Import key
+  rpm_key:
+    key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+- name: Ensure Jenkins is installed.
+  yum:
+    name: "jenkins"
+    state: installed
