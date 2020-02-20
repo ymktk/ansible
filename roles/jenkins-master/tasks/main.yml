@@ -13,3 +13,19 @@
   yum:
     name: "jenkins"
     state: installed
+
+- name: Disable Install wizard
+  copy:
+    content: "2.204.2"
+    dest: /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+
+- name: Disable Upgrade wizard
+  copy:
+    content: "2.204.2"
+    dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+    owner: jenkins
+    group: jenkins
+    mode: 0644
