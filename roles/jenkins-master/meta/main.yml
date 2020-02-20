@@ -1,0 +1,14 @@
+galaxy_info:
+  role_name: jenkins master
+  author: Takahiro Yamaki
+  description: Jenkins for CentOS
+  license: license (Apache-2.0)
+  min_ansible_version: 2.9
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  galaxy_tags:
+  - jenkins
+
+dependencies: []
