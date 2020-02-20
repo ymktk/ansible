@@ -1,0 +1,9 @@
+---
+# Setup/install
+- name: Ensure git is installed.
+  yum:
+    name: git
+    state: installed
+
+- name: check git version
+  shell: git --version
