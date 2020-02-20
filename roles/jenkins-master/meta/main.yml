@@ -10,5 +10,9 @@ galaxy_info:
     - 7
   galaxy_tags:
   - jenkins
+  - ci
+  - development
 
-dependencies: []
+dependencies:
+  - java
+  - git
