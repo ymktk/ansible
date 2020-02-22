@@ -1,2 +1,5 @@
 ---
 # 主にサービスの再起動といった特定の条件で発火するイベントtaskを定義
+
+- name: restart jenkins
+  service: name=jenkins state=restarted
