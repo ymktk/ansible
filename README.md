@@ -58,6 +58,8 @@ python3 -V
 pip3 -V
 
 ## ssh test
+ssh root@app
+exit
 ssh jenkins@app
 exit
 
@@ -65,14 +67,17 @@ exit
 cd ~/code/roles/
 
 # Syntax check
-ansible-playbook -i inventory playbook.yml --syntax-check
+ansible-playbook -i java/tests/inventory java/tests/playbook.yml --syntax-check -vvv
 
 # Task list
-ansible-playbook -i inventory playbook.yml --list-tasks
+ansible-playbook -i java/tests/inventory java/tests/playbook.yml --list-tasks -vvv
+
+# Ping test
+ansible all -i java/tests/inventory -m ping -u root -vvv
 
 # Run
 # -vvv 詳細情報の表示及び、実行結果をJSONで返す
-ansible-playbook -i inventory playbook.yml -vvv
+ansible-playbook -i java/tests/inventory java/tests/playbook.yml -vvv
 
 
 # 3-2. Target server
