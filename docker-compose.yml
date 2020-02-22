@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  control:
+    image: ansible_controller
+    container_name: con
+    working_dir: "/home/ansible"
+
+    volumes:
+      - /c/Users/Public/repos/ansible:/home/ansible/code
+      - /c/Users/Public/docker-shared:/tmp/shared
+    tty: true # Can keep running
+
+  app:
+    image: centos-systemd_server
+    container_name: app
+    working_dir: "/tmp"
+    volumes:
+      - /c/Users/Public/docker-shared:/tmp/shared
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    ports:
+      - "8082:8082"
+      - "22:22"
+    privileged: true
+    tty: true # Can keep running
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    container_name: mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=sa@Password
+    # volumes:
+      # - /c/Users/Public/docker-shared/data-mssql:/tmp/shared
+    ports:
+      - "1433:1433"
