@@ -42,14 +42,6 @@
 - name: Ensure Jenkins is started and runs on startup.
   service: name=jenkins state=started enabled=yes
 
-# - name: Disable Install wizard
-#   copy:
-#     content: "2.204.2"
-#     dest: ${JENKINS_HOME TODO}/jenkins.install.InstallUtil.lastExecVersion
-#     owner: jenkins
-#     group: jenkins
-#     mode: 0644
-
 # - name: Disable Upgrade wizard
 #   copy:
 #     content: "2.204.2"
