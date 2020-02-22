@@ -25,7 +25,20 @@ export TMPDIR=/c/Users/Public/docker-shared
 docker run -it --rm ansible_controller cat /home/ansible/.ssh/id_rsa.pub >> $TMPDIR/tmp-id_rsa.pub
 
 # 2-3. Add the public key into the target server and create modified image
+docker container cp $TMPDIR/tmp-id_rsa.pub target:/root/.ssh/authorized_keys
 docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/jenkins/.ssh/authorized_keys
+
+docker exec -it target bash
+
+chown root:root /root/.ssh/authorized_keys
+chmod 600       /root/.ssh/authorized_keys
+
+chown jenkins:jenkins /home/jenkins/.ssh/authorized_keys
+chmod 600             /home/jenkins/.ssh/authorized_keys
+
+ls -ld /root/.ssh  /home/jenkins/.ssh
+ls -l  /root/.ssh/ /home/jenkins/.ssh/
+
 docker container stop target
 docker commit target centos-systemd_server
 docker container rm   target
@@ -44,6 +57,11 @@ ansible --version
 python3 -V
 pip3 -V
 
+## ssh test
+ssh jenkins@app
+exit
+
+## Ansible play
 cd ~/code/roles/
 
 # Syntax check
