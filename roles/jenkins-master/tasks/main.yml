@@ -2,12 +2,12 @@
 # Variable setup.
 - name: Add Jenkins repo url
   get_url:
-    url: "{{ jenkins_repo_url }}"
+    url:  "{{ jenkins_repo_url }}"
     dest: "{{ jenkins_repo_file }}"
 
 - name: Add Jenkins repo GPG key
   rpm_key:
-    key: "{{ jenkins_repo_key_url }}"
+    key:   "{{ jenkins_repo_key_url }}"
     state: present
 
 - name: Ensure dependencies are installed.
@@ -21,7 +21,7 @@
 # Download rpm
 - name: Download specific Jenkins version.
   get_url:
-    url: "{{ jenkins_pkg_url }}/jenkins-{{ jenkins_version }}.noarch.rpm"
+    url:  "{{ jenkins_pkg_url }}/jenkins-{{ jenkins_version }}.noarch.rpm"
     dest: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
 
 - name: Check if we downloaded a specific version of Jenkins.
@@ -31,7 +31,7 @@
 # Install rpm
 - name: Install our specific version of Jenkins.
   package:
-    name: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
+    name:  "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
     state: installed
   # notify: configure default users
 
@@ -42,10 +42,10 @@
 - name: Ensure Jenkins is started and runs on startup.
   service: name=jenkins state=started enabled=yes
 
-# - name: Disable Upgrade wizard
-#   copy:
-#     content: "2.204.2"
-#     dest: ${JENKINS_HOME TODO}/jenkins.install.UpgradeWizard.state
-#     owner: jenkins
-#     group: jenkins
-#     mode: 0644
+- name: Disable Upgrade wizard
+  copy:
+    content: "{{ jenkins_version }}"
+    dest:  "{{ jenkins_home }}/jenkins.install.UpgradeWizard.state"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
