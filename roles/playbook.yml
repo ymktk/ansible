@@ -1,5 +1,5 @@
 ---
-- hosts: application_servers
+- hosts: jenkins
   remote_user: root
   become: yes
   roles:
