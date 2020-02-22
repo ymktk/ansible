@@ -4,3 +4,13 @@
 
 jenkins_version: "2.221-1.1"
 
+jenkins_home: /data/jenkins
+jenkins_http_port: 8082
+jenkins_process_user: jenkins
+jenkins_process_group: "{{ jenkins_process_user }}"
+# If Jenkins is behind a proxy
+jenkins_proxy_host: ""
+jenkins_proxy_port: ""
+jenkins_proxy_noproxy:
+  - "127.0.0.1"
+  - "localhost"
