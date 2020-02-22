@@ -6,11 +6,28 @@ jenkins_version: "2.221-1.1"
 
 jenkins_home: /data/jenkins
 jenkins_http_port: 8082
-jenkins_process_user: jenkins
-jenkins_process_group: "{{ jenkins_process_user }}"
+
 # If Jenkins is behind a proxy
 jenkins_proxy_host: ""
 jenkins_proxy_port: ""
 jenkins_proxy_noproxy:
   - "127.0.0.1"
   - "localhost"
+
+jenkins_admin_username: admin
+jenkins_admin_password: admin
+
+jenkins_process_user:  jenkins
+jenkins_process_group: "{{ jenkins_process_user }}"
+
+jenkins_url_prefix:   "/jenkins"
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Singapore"
+
+jenkins_init_changes:
+  - option: "JENKINS_ARGS"
+    value:  "--prefix={{ jenkins_url_prefix }}"
+
+  - option: "{{ jenkins_config_key_java_options }}"
+    value:  "{{ jenkins_java_options }}"
+
+jenkins_jar_location: /opt/jenkins-cli.jar
