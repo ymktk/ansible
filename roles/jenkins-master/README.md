@@ -31,7 +31,7 @@ The HTTP port for Jenkins' web interface.
 
 Default admin account credentials which will be created the first time Jenkins is installed.
 
-    jenkins_jar_location: /opt/jenkins-cli.jar
+    jenkins_cli_jar_file: /opt/jenkins-cli.jar
 
 The location at which the `jenkins-cli.jar` will be kept.
 
