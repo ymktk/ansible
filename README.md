@@ -82,8 +82,7 @@ ansible-playbook -i java/tests/inventory java/tests/playbook.yml -vvv
 
 # 3-2. Target server
 docker exec -it app bash
-
-
+java --version
 
 ```
 
