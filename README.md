@@ -28,6 +28,7 @@ docker run -it --rm ansible_controller cat /home/ansible/.ssh/id_rsa.pub >> $TMP
 docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/jenkins/.ssh/authorized_keys
 docker container stop target
 docker commit target centos-systemd_server
+docker container rm   target
 ```
 
 # 3. How to start test servers
