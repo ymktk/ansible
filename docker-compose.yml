@@ -16,8 +16,9 @@ services:
     container_name: app
     working_dir: "/tmp"
     volumes:
-      - /c/Users/Public/docker-shared:/tmp/shared
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /c/Users/Public/docker-shared/data-jenkins:/data
+      - /c/Users/Public/docker-shared:/tmp/shared
     ports:
       - "8082:8082"
       - "22:22"
