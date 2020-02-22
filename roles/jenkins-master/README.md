@@ -11,21 +11,62 @@ No.
 Role Variables
 --------------
 
-TBD.
+Available variables are listed below. Default values are here `defaults/main.yml`.
+
+
+    jenkins_home: /data/jenkins
+
+The Jenkins home directory is being used for storing data. (Default `/var/lib/jenkins`)
+
+    jenkins_http_port: 8082
+
+The HTTP port for Jenkins' web interface.
+
+    jenkins_admin_username: admin
+    jenkins_admin_password: admin
+
+Default admin account credentials which will be created the first time Jenkins is installed.
+
+    jenkins_jar_location: /opt/jenkins-cli.jar
+
+The location at which the `jenkins-cli.jar` will be kept.
+
+    jenkins_url_prefix: "/jenkins"
+
+Used for setting a URL prefix for your Jenkins installation. The option is added as `--prefix={{ jenkins_url_prefix }}` to the Jenkins initialization `java` invocation, so you can access the installation at a path like `http://www.example.com{{ jenkins_url_prefix }}`.
+
+    jenkins_init_changes:
+      - option: "JENKINS_ARGS"
+        value: "--prefix={{ jenkins_url_prefix }}"
+      - option: "JENKINS_JAVA_OPTIONS"
+        value: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Singapore"
+
+Changes made to the Jenkins init script; the default set of changes set the configured URL prefix and add in configured Java options for Jenkins' startup. You can add other option/value pairs if you need to set other options for the Jenkins init file.
+
+    jenkins_proxy_host: ""
+    jenkins_proxy_port: ""
+    jenkins_proxy_noproxy:
+      - "127.0.0.1"
+      - "localhost"
+
+Proxy settings
+
 
 Dependencies
 ------------
 
-- java
+  - java
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - jenkins-master
+```yaml
+- hosts: servers
+  remote_user: root
+  become: yes
+  roles:
+    - jenkins-master
+```
 
 License
 -------
