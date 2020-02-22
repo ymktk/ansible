@@ -1,31 +1,51 @@
 ---
-# tasks file for jenkins-master
-- name: Add yum repository
+# Variable setup.
+- name: Add Jenkins repo url
   get_url:
-    url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
-    dest: /etc/yum.repos.d/jenkins.repo
+    url: "{{ jenkins_repo_url }}"
+    dest: "{{ jenkins_repofile_path }}"
 
-- name: Import key
+- name: Add Jenkins repo GPG key
   rpm_key:
-    key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+    key: "{{ jenkins_repo_key_url }}"
+    state: present
 
-- name: Ensure Jenkins is installed.
-  yum:
-    name: "jenkins"
+- name: Ensure dependencies are installed.
+  package:
+    name:
+      - curl
+      - libselinux-python #need?
+      - initscripts #need?
     state: installed
 
-- name: Disable Install wizard
-  copy:
-    content: "2.204.2"
-    dest: /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
-    owner: jenkins
-    group: jenkins
-    mode: 0644
+# Download rpm
+- name: Download specific Jenkins version.
+  get_url:
+    url: "{{ jenkins_pkg_url }}/jenkins-{{ jenkins_version }}.noarch.rpm"
+    dest: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
 
-- name: Disable Upgrade wizard
-  copy:
-    content: "2.204.2"
-    dest: /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-    owner: jenkins
-    group: jenkins
-    mode: 0644
+- name: Check if we downloaded a specific version of Jenkins.
+  stat:
+    path: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
+
+- name: Install our specific version of Jenkins.
+  package:
+    name: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
+    state: installed
+  # notify: configure default users
+
+# - name: Disable Install wizard
+#   copy:
+#     content: "2.204.2"
+#     dest: ${JENKINS_HOME TODO}/jenkins.install.InstallUtil.lastExecVersion
+#     owner: jenkins
+#     group: jenkins
+#     mode: 0644
+
+# - name: Disable Upgrade wizard
+#   copy:
+#     content: "2.204.2"
+#     dest: ${JENKINS_HOME TODO}/jenkins.install.UpgradeWizard.state
+#     owner: jenkins
+#     group: jenkins
+#     mode: 0644
