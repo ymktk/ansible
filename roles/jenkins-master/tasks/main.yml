@@ -28,11 +28,16 @@
   stat:
     path: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
 
+# Install rpm
 - name: Install our specific version of Jenkins.
   package:
     name: "/tmp/jenkins-{{ jenkins_version }}.noarch.rpm"
     state: installed
   # notify: configure default users
+
+# Configure Jenkins init settings.
+- include_tasks: settings.yml
+
 
 # - name: Disable Install wizard
 #   copy:

@@ -1,0 +1,11 @@
+---
+- name: Check if jenkins_init_file exists.
+  stat:
+    path: "{{ jenkins_init_file }}"
+  register: jenkins_init_file_stat
+
+- name: Ensure jenkins_init_file exists.
+  file:
+    path: "{{ jenkins_init_file }}"
+    state: touch
+  when: not jenkins_init_file_stat.stat.exists
