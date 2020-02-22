@@ -1,2 +1,2 @@
 ---
-# handlers file for jenkins-master
+# 主にサービスの再起動といった特定の条件で発火するイベントtaskを定義

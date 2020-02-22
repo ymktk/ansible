@@ -1,2 +1,3 @@
 ---
-# defaults file for jenkins-master
+# roleで利用される変数のデフォルト値を定義
+# varsとの違いは、group_varsなどで変数を上書きできる
