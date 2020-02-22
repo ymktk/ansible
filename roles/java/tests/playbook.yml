@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: application_servers
   become: yes
   roles:
     - java
