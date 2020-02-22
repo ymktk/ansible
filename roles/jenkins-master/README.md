@@ -14,6 +14,10 @@ Role Variables
 Available variables are listed below. Default values are here `defaults/main.yml`.
 
 
+    jenkins_version: "2.221-1.1"
+
+Jenkins version can be pinned to any version available on http://pkg.jenkins-ci.org/redhat/ .
+
     jenkins_home: /data/jenkins
 
 The Jenkins home directory is being used for storing data. (Default `/var/lib/jenkins`)
