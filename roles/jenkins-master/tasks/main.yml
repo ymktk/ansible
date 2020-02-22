@@ -3,7 +3,7 @@
 - name: Add Jenkins repo url
   get_url:
     url: "{{ jenkins_repo_url }}"
-    dest: "{{ jenkins_repofile_path }}"
+    dest: "{{ jenkins_repo_file }}"
 
 - name: Add Jenkins repo GPG key
   rpm_key:
