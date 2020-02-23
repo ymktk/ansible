@@ -1,2 +1,3 @@
 ---
-# Update Jenkins and install configured plugins.
+- include_tasks: set-admin-password.yml
+
