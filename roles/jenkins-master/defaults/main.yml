@@ -14,8 +14,8 @@ jenkins_proxy_noproxy:
   - "127.0.0.1"
   - "localhost"
 
-jenkins_admin_username: admin
-jenkins_admin_password: admin
+jenkins_admin_username: jkadmin
+jenkins_admin_password: jkadmin
 
 jenkins_process_user:  jenkins
 jenkins_process_group: "{{ jenkins_process_user }}"
@@ -34,4 +34,3 @@ jenkins_cli_jar_file: /opt/jenkins-cli.jar
 jenkins_hostname: localhost
 jenkins_connection_delay: 5
 jenkins_connection_retries: 60
-
