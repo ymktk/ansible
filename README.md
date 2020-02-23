@@ -28,7 +28,7 @@ docker run -it --rm ansible_controller cat /home/ansible/.ssh/id_rsa.pub >> $TMP
 docker container cp $TMPDIR/tmp-id_rsa.pub target:/root/.ssh/authorized_keys
 docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/jenkins/.ssh/authorized_keys
 
-docker exec -it target bash
+docker exec -it -u root target bash
 
 chown root:root /root/.ssh/authorized_keys
 chmod 600       /root/.ssh/authorized_keys
@@ -38,6 +38,8 @@ chmod 600             /home/jenkins/.ssh/authorized_keys
 
 ls -ld /root/.ssh  /home/jenkins/.ssh
 ls -l  /root/.ssh/ /home/jenkins/.ssh/
+
+exit
 
 docker container stop target
 docker commit target centos-systemd_server
@@ -58,25 +60,30 @@ python3 -V
 pip3 -V
 
 ## ssh test
-ssh root@app
+ssh root@jk
 exit
-ssh jenkins@app
+
+ssh jenkins@jk
+sudo -l
 exit
 
 ## Ansible play
 cd ~/code/roles/
 
+# Ping test
+ansible -i inventory cicd_servers -m ping -u root -vvv
+
 # Syntax check
+#  -vvv 詳細情報の表示及び、実行結果をJSONで返す
 ansible-playbook -i inventory playbook.yml --syntax-check -vvv
 
 # Task list
 ansible-playbook -i inventory playbook.yml --list-tasks -vvv
 
-# Ping test
-ansible all -i inventory -m ping -u root -vvv
+# Dry Run
+ansible-playbook -i inventory playbook.yml --check -vvv
 
 # Run
-#    -vvv 詳細情報の表示及び、実行結果をJSONで返す
 ansible-playbook -i inventory playbook.yml -vvv
 
 
