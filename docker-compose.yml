@@ -11,9 +11,9 @@ services:
       - /c/Users/Public/docker-shared:/tmp/shared
     tty: true # Can keep running
 
-  app:
+  jenkins:
     image: centos-systemd_server
-    container_name: app
+    container_name: jk
     working_dir: "/tmp"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
