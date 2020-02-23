@@ -75,16 +75,16 @@ ansible -i inventory cicd_servers -m ping -u root -vvv
 
 # Syntax check
 #  -vvv 詳細情報の表示及び、実行結果をJSONで返す
-ansible-playbook -i inventory playbook.yml --syntax-check -vvv
+ansible-playbook -i inventory playbook-build-jenkins-master --syntax-check -vvv
 
 # Task list
-ansible-playbook -i inventory playbook.yml --list-tasks -vvv
+ansible-playbook -i inventory playbook-build-jenkins-master --list-tasks -vvv
 
 # Dry Run
-ansible-playbook -i inventory playbook.yml --check -vvv
+ansible-playbook -i inventory playbook-build-jenkins-master --check -vvv
 
 # Run
-ansible-playbook -i inventory playbook.yml -vvv
+ansible-playbook -i inventory playbook-build-jenkins-master -vvv
 
 
 # 3-2. Target server
