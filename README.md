@@ -54,7 +54,7 @@ cd /path/to/ansible/
 docker-compose up -d
 
 # 3-1. Ansible controller
-docker exec -it con bash
+docker exec -it con sh
 ansible --version
 python3 -V
 pip3 -V
