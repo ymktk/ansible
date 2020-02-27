@@ -1,0 +1,5 @@
+---
+- hosts: cicd_servers
+  remote_user: jenkins
+  roles:
+    - jenkins-plugins
