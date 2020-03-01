@@ -10,12 +10,12 @@ tomcat_port_ajp:       8009
 
 tomcat_java_home: /usr/lib/jvm/java-11-openjdk
 
-# 2% of the total system memory
-tomcat_jvm_memory_xms: "{{ ansible_memtotal_mb * 2//100 }}"
-tomcat_jvm_memory_xmx: "{{ ansible_memtotal_mb * 2//100 }}"
+# Sample. 2% of the total system memory
+# tomcat_jvm_memory_xms: "{{ ansible_memtotal_mb * 2//100 }}"
+# tomcat_jvm_memory_xmx: "{{ ansible_memtotal_mb * 2//100 }}"
 
-#tomcat_jvm_memory_xms: 100
-#tomcat_jvm_memory_xmx: 100
+tomcat_jvm_memory_xms: 100
+tomcat_jvm_memory_xmx: 100
 
 tomcat_debug_mode: False
 # tomcat_port_debug: 8000
