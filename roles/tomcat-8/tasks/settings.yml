@@ -9,3 +9,9 @@
     src:  "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
     dest: "{{ tomcat_install_path }}/{{ tomcat_service_name }}"
     state: link
+
+- name: Delete Tomcat default webapps ("{{ tomcat_unnecessary_default_apps }}")
+  file:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/{{ item }}"
+    state: absent
+  with_items: "{{ tomcat_unnecessary_default_apps }}"

@@ -13,3 +13,10 @@ tomcat_listen_address: 0.0.0.0
 
 tomcat_download_URL: https://archive.apache.org/dist
 tomcat_download_dir: /tmp/downloads
+
+tomcat_unnecessary_default_apps:
+  - ROOT
+  - docs
+  - examples
+  - host-manager
+  - manager
