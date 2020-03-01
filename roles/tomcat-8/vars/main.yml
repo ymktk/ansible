@@ -1,6 +1,8 @@
 ---
 # vars file for tomcat-8
 
+tomcat_service_name: tomcat
+
 tomcat_user:  tomcat
 tomcat_group: tomcat
 
