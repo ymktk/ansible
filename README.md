@@ -27,6 +27,7 @@ docker run -it --rm ansible_controller cat /home/ansible/.ssh/id_rsa.pub >> $TMP
 # 2-3. Add the public key into the target server and create modified image
 docker container cp $TMPDIR/tmp-id_rsa.pub target:/root/.ssh/authorized_keys
 docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/jenkins/.ssh/authorized_keys
+docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/tomcat/.ssh/authorized_keys
 
 docker exec -it -u root target bash
 
@@ -36,8 +37,11 @@ chmod 600       /root/.ssh/authorized_keys
 chown jenkins:jenkins /home/jenkins/.ssh/authorized_keys
 chmod 600             /home/jenkins/.ssh/authorized_keys
 
-ls -ld /root/.ssh  /home/jenkins/.ssh
-ls -l  /root/.ssh/ /home/jenkins/.ssh/
+chown tomcat:tomcat /home/tomcat/.ssh/authorized_keys
+chmod 600           /home/tomcat/.ssh/authorized_keys
+
+ls -ld /root/.ssh  /home/jenkins/.ssh  /home/tomcat/.ssh
+ls -l  /root/.ssh/ /home/jenkins/.ssh/ /home/tomcat/.ssh/
 
 exit
 
@@ -88,8 +92,10 @@ ansible-playbook -i inventory playbook-build-jenkins-master.yml -vvv
 
 
 # Run for Jenkins plugins
-ansible-playbook -i inventory playbook-jenkins-plugins.yml -vvv
+# ansible-playbook -i inventory playbook-jenkins-plugins.yml -vvv
 
+# Install tomcat 8
+ansible-playbook -i inventory playbook-build-tomcat-8.yml -vv
 
 # 3-2. Target server
 docker exec -it app bash

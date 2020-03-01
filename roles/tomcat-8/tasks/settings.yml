@@ -1,0 +1,36 @@
+- name: Setup server.xml
+  template:
+    src: "{{ tomcat_template_server }}"
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
+#   notify: restart tomcat
+
+- name: Create symlink {{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }} to {{ tomcat_install_path }}/{{ tomcat_service_name }}
+  file:
+    src:  "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+    dest: "{{ tomcat_install_path }}/{{ tomcat_service_name }}"
+    state: link
+
+- name: Delete Tomcat default webapps ("{{ tomcat_unnecessary_default_apps }}")
+  file:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/{{ item }}"
+    state: absent
+  with_items: "{{ tomcat_unnecessary_default_apps }}"
+
+- name: Set recursively webapps directory owner/group for production installation
+  file:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    recurse: yes
+
+- name: Configure service file {{ tomcat_service_name }}.service
+  template:
+    src: "tomcat.service.j2"
+    dest: /usr/lib/systemd/system/{{ tomcat_service_name }}.service
+  notify: restart tomcat
+
+- name: Enable tomcat service on startup
+  systemd:
+    name: "{{ tomcat_service_name }}"
+    enabled: yes
+    daemon_reload: yes

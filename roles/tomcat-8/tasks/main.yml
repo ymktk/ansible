@@ -1,0 +1,8 @@
+---
+# tasks file for tomcat-8
+
+- name: Install tomcat
+  include: install.yml
+
+- name: Setup tomcat
+  include: settings.yml
