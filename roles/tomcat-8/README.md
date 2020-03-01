@@ -16,9 +16,6 @@ Role Variables
 
 - `tomcat_version`: tomcat version to install
 
-
-
-
 Dependencies
 ------------
 
