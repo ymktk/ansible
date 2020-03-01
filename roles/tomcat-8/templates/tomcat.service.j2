@@ -10,6 +10,7 @@ Environment=JAVA_HOME={{ tomcat_java_home }}
 Environment=CATALINA_PID={{ tomcat_install_path }}/{{ tomcat_service_name }}/temp/tomcat.pid
 Environment=CATALINA_HOME={{ tomcat_install_path }}/{{ tomcat_service_name }}
 Environment=CATALINA_BASE={{ tomcat_install_path }}/{{ tomcat_service_name }}
+Environment=CATALINA_OUT={{ tomcat_catalina_out_path }}
 Environment='CATALINA_OPTS=-Xms{{ tomcat_jvm_memory_xms }}M -Xmx{{ tomcat_jvm_memory_xmx }}M -server -XX:+UseParallelGC {% if tomcat_debug_mode == True %}-Xdebug -Xrunjdwp:transport=dt_socket,address={{ tomcat_port_debug }},server=y,suspend=n{% endif %}'
 Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
 

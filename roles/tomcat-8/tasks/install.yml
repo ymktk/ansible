@@ -11,6 +11,13 @@
     uid: "{{ tomcat_user_uid | default(omit) }}"
     state: present
 
+- name: Create tomcat log directory ("{{ tomcat_log_dir }}")
+  file:
+    path: '{{ tomcat_log_dir }}'
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+
 - name: Create temp download directory
   file:
     path: '{{ tomcat_download_dir }}'
