@@ -18,12 +18,12 @@
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
 
-- name: Create temp download directory
+- name: Create temp download directory ("{{ tomcat_download_dir }}")
   file:
     path: '{{ tomcat_download_dir }}'
     state: directory
 
-- name: Check if tomcat is already unarchived
+- name: Check if tomcat is already unarchived ("{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}")
   stat:
     path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
   register: is_installed
