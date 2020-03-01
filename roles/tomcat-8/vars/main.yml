@@ -17,7 +17,7 @@ tomcat_download_URL: https://archive.apache.org/dist
 tomcat_download_dir: /tmp/downloads
 
 tomcat_unnecessary_default_apps:
-  - ROOT
+  # - ROOT
   - docs
   - examples
   - host-manager
