@@ -30,7 +30,7 @@
 
 - name: Configure service file {{ tomcat_service_name }}.service
   template:
-    src: "tomcat.service.j2"
+    src: "single-instance.service.j2"
     dest: /usr/lib/systemd/system/{{ tomcat_service_name }}.service
   notify: restart tomcat
 
