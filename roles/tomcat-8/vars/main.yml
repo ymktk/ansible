@@ -1,6 +1,9 @@
 ---
 # vars file for tomcat-8
 
+tomcat_user:  tomcat
+tomcat_group: tomcat
+
 tomcat_install_path: /opt
 
 tomcat_major_version:   "{{ tomcat_version.split('.')[0].tomcat_version.split('.')[1] }}"
