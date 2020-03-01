@@ -1,8 +1,13 @@
 - name: Setup server.xml
   template:
-    src: "{{ tomcat_template_server }}"
+    src: "{{ template_server_xml }}"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
 #   notify: restart tomcat
+
+- name: Setup logging.properties
+  template:
+    src: "logging-properties.j2"
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
 
 - name: Create symlink {{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }} to {{ tomcat_install_path }}/{{ tomcat_service_name }}
   file:
