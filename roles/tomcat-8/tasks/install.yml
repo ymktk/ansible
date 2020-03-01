@@ -37,9 +37,3 @@
     creates: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
   register: tomcat_installed
   when: not is_installed.stat.exists
-
-- name: Setup server.xml
-  template:
-    src: "{{ tomcat_template_server }}"
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
-#   notify: restart tomcat

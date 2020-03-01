@@ -1,0 +1,5 @@
+- name: Setup server.xml
+  template:
+    src: "{{ tomcat_template_server }}"
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
+#   notify: restart tomcat
