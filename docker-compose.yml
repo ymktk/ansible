@@ -21,7 +21,19 @@ services:
       - /c/Users/Public/docker-shared:/tmp/shared
     ports:
       - "8082:8082"
-      - "22:22"
+    privileged: true
+    tty: true # Can keep running
+
+  app:
+    image: centos-systemd_server
+    container_name: app
+    working_dir: "/opt"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /c/Users/Public/docker-shared/data-tomcat:/data
+      - /c/Users/Public/docker-shared:/tmp/shared
+    ports:
+      - "8090:8090"
     privileged: true
     tty: true # Can keep running
 
