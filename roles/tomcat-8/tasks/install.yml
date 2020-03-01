@@ -1,0 +1,14 @@
+- name: Ensure "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/ exists
+  file:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf"
+    state: directory
+    owner: tomcat
+    group: tomcat
+    mode: u+rwx
+    follow: true
+
+- name: Setup server.xml
+  template:
+    src: "{{ tomcat_template_server }}"
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
+#   notify: restart tomcat

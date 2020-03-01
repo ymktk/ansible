@@ -1,2 +1,9 @@
 ---
 # vars file for tomcat-8
+
+tomcat_install_path: /opt
+
+tomcat_major_version: "{{ tomcat_version.split('.')[0].tomcat_version.split('.')[1] }}"
+tomcat_template_server: "tomcat-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
+
+tomcat_listen_address: 0.0.0.0
