@@ -18,6 +18,14 @@
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
 
+- name: Create tomcat PID directory ("{{ tomcat_pid_dir }}")
+  file:
+    path: '{{ tomcat_pid_dir }}'
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: 0750
+
 - name: Create temp download directory ("{{ tomcat_download_dir }}")
   file:
     path: '{{ tomcat_download_dir }}'
