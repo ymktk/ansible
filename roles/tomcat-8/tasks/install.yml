@@ -22,14 +22,21 @@
     dest: '{{ tomcat_download_dir }}'
     timeout: 120
 
-- name: Ensure "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/ exists
-  file:
-    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf"
-    state: directory
-    owner: tomcat
-    group: tomcat
-    mode: u+rwx
-    follow: true
+- name: Check if tomcat is already unarchived
+  stat:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+  register: is_installed
+
+- name: Unarchive apache-tomcat-{{ tomcat_version }}.tar.gz at {{ tomcat_install_path }}
+  unarchive:
+    src:  "{{ tomcat_download_dir }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    dest: "{{ tomcat_install_path }}"
+    remote_src: True
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    creates: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+  register: tomcat_installed
+  when: not is_installed.stat.exists
 
 - name: Setup server.xml
   template:
