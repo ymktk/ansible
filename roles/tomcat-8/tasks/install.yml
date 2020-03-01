@@ -11,7 +11,7 @@
     uid: "{{ tomcat_user_uid | default(omit) }}"
     state: present
 
-- name: Create temp directory
+- name: Create temp download directory
   file:
     path: '{{ tomcat_download_dir }}'
     state: directory
