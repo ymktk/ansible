@@ -16,6 +16,7 @@ Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./
 
 ExecStart={{ tomcat_install_path }}/{{ tomcat_service_name }}/bin/startup.sh
 ExecStop={{ tomcat_install_path }}/{{ tomcat_service_name }}/bin/shutdown.sh
+ExecReStart={{ tomcat_install_path }}/{{ tomcat_service_name }}/bin/shutdown.sh;{{ tomcat_install_path }}/{{ tomcat_service_name }}/bin/startup.sh
 
 User={{ tomcat_user }}
 Group={{ tomcat_group }}
