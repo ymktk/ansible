@@ -4,5 +4,5 @@
 - name: Install tomcat
   include: install.yml
 
-- name: Configure tomcat
-  include: configure.yml
+- name: Setup tomcat
+  include: settings.yml
