@@ -19,6 +19,3 @@ tomcat_instances:
 # Sample. 2% of the total system memory
 # tomcat_jvm_memory_xms: "{{ ansible_memtotal_mb * 2//100 }}"
 # tomcat_jvm_memory_xmx: "{{ ansible_memtotal_mb * 2//100 }}"
-
-tomcat_jvm_memory_xms: 100
-tomcat_jvm_memory_xmx: 100
