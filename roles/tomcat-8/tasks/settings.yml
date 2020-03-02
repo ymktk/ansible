@@ -1,25 +1,25 @@
-- name: Create symlink {{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }} to {{ tomcat_install_path }}/{{ tomcat_service_name }}
+- name: Create symlink {{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }} to {{ tomcat_install_dir }}/{{ tomcat_service_name }}
   file:
-    src:  "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
-    dest: "{{ tomcat_install_path }}/{{ tomcat_service_name }}"
+    src:  "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
+    dest: "{{ tomcat_install_dir }}/{{ tomcat_symlink }}"
     state: link
 
 - name: Delete Tomcat default webapps ("{{ tomcat_unnecessary_default_apps }}")
   file:
-    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/{{ item }}"
+    path:  "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps/{{ item }}"
     state: absent
   with_items: "{{ tomcat_unnecessary_default_apps }}"
 
 - name: Set recursively webapps directory owner/group for production installation
   file:
-    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps"
+    path:  "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}/webapps"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     recurse: yes
 
 - name: Create tomcat PID directory ("{{ tomcat_pid_dir }}")
   file:
-    path: '{{ tomcat_pid_dir }}'
+    path:  "{{ tomcat_pid_dir }}"
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
@@ -27,7 +27,7 @@
 
 - name: Create tomcat instances directory ("{{ tomcat_instances_dir }}")
   file:
-    path: '{{ tomcat_instances_dir }}'
+    path:  "{{ tomcat_instances_dir }}"
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"

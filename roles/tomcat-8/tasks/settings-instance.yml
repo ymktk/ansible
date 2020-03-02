@@ -4,7 +4,7 @@
 
 - name: Create directories under "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}"
   file:
-    path: '{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/{{ item }}'
+    path:  "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/{{ item }}"
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
@@ -17,24 +17,24 @@
 
 - name: Copy default conf files from catalina_home
   copy:
-    src:  "{{ tomcat_install_path }}/{{ catalina_home_name }}/conf/{{ item }}"
-    dest: "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/conf/"
     remote_src: yes
+    src:   "{{ tomcat_install_dir }}/{{ tomcat_symlink }}/conf/{{ item }}"
+    dest:  "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/conf/"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
   with_items: "{{ tomcat_necessary_default_conf_files }}"
 
 - name: Copy sample application "ROOT" from catalina_home
   copy:
-    src:  "{{ tomcat_install_path }}/{{ catalina_home_name }}/webapps/ROOT"
-    dest: "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/webapps/"
     remote_src: yes
+    src:   "{{ tomcat_install_dir }}/{{ tomcat_symlink }}/webapps/ROOT"
+    dest:  "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/webapps/"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
 
 - name: Update logging.properties
   template:
-    src: "logging-properties.j2"
+    src:  "logging-properties.j2"
     dest: "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/conf/logging.properties"
 
 - name: Update server.xml
