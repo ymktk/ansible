@@ -4,10 +4,10 @@
 tomcat_version: 8.5.51
 tomcat_java_home: /usr/lib/jvm/java-11-openjdk
 
-tomcat_port_connector: 8090
-tomcat_port_shutdown:  8005
-tomcat_port_redirect:  8443
-tomcat_port_ajp:       8009
+# tomcat_port_connector: 8090
+# tomcat_port_shutdown:  8005
+# tomcat_port_redirect:  8443
+# tomcat_port_ajp:       8009
 
 tomcat_instances:
   app1:

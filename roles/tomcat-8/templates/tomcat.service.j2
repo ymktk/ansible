@@ -1,0 +1,26 @@
+# Systemd unit file for tomcat
+[Unit]
+Description=Apache Tomcat 8
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME={{ tomcat_java_home }}
+Environment=CATALINA_HOME={{ tomcat_install_path }}/{{ catalina_home_name }}
+
+Environment=CATALINA_BASE={{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}
+Environment=CATALINA_PID={{ tomcat_pid_dir }}/{{ tomcat_instances[application].instance_name }}.pid
+Environment=CATALINA_OUT={{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/logs/catalina.out
+
+Environment='CATALINA_OPTS=-Xms{{ tomcat_instances[application].jvm_xms }}M -Xmx{{ tomcat_instances[application].jvm_xmx }}M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+ExecStart={{ tomcat_install_path }}/{{ catalina_home_name }}/bin/startup.sh
+ExecStop={{ tomcat_install_path }}/{{ catalina_home_name }}/bin/shutdown.sh
+
+User={{ tomcat_user }}
+Group={{ tomcat_group }}
+
+[Install]
+WantedBy=multi-user.target

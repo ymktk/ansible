@@ -1,36 +1,3 @@
-- name: Create tomcat log directory ("{{ tomcat_log_dir }}")
-  file:
-    path: '{{ tomcat_log_dir }}'
-    state: directory
-    owner: "{{ tomcat_user }}"
-    group: "{{ tomcat_group }}"
-
-- name: Create tomcat PID directory ("{{ tomcat_pid_dir }}")
-  file:
-    path: '{{ tomcat_pid_dir }}'
-    state: directory
-    owner: "{{ tomcat_user }}"
-    group: "{{ tomcat_group }}"
-    mode: 0750
-
-- name: Create tomcat instances directory ("{{ tomcat_instances_dir }}")
-  file:
-    path: '{{ tomcat_instances_dir }}'
-    state: directory
-    owner: "{{ tomcat_user }}"
-    group: "{{ tomcat_group }}"
-
-- name: Setup server.xml
-  template:
-    src: "{{ template_server_xml }}"
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
-#   notify: restart tomcat
-
-- name: Setup logging.properties
-  template:
-    src: "logging-properties.j2"
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
-
 - name: Create symlink {{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }} to {{ tomcat_install_path }}/{{ tomcat_service_name }}
   file:
     src:  "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
@@ -50,66 +17,23 @@
     group: "{{ tomcat_group }}"
     recurse: yes
 
-
-
-- name: Set values for Multi-instances. App1
-  set_fact:
-    tomcat_instance:
-      app_name: "app1"
-      instance_name:  "{{ tomcat_instances.app1.instance_name }}"
-      port_connector: "{{ tomcat_instances.app1.port_connector }}"
-      port_shutdown:  "{{ tomcat_instances.app1.port_shutdown }}"
-      jvm_xms:        "{{ tomcat_instances.app1.jvm_xms }}"
-      jvm_xmx:        "{{ tomcat_instances.app1.jvm_xmx }}"
-
-- name: Create tomcat instance directories under "{{ tomcat_instances_dir }}/{{ tomcat_instance.instance_name }}"
+- name: Create tomcat PID directory ("{{ tomcat_pid_dir }}")
   file:
-    path: '{{ tomcat_instances_dir }}/{{ tomcat_instance.instance_name }}/{{ item }}'
+    path: '{{ tomcat_pid_dir }}'
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
-  with_items:
-    - "logs"
-    - "temp"
-    - "webapps"
-    - "work"
+    mode: 0750
 
-# - name: Copy conf dir from catalina_home
-#   copy:
-#     src:  "{{ tomcat_install_path }}/{{ catalina_home_name }}/conf"
-#     dest: "{{ tomcat_instances_dir }}/{{ tomcat_instance.instance_name }}/conf"
-#     owner: "{{ tomcat_user }}"
-#     group: "{{ tomcat_group }}"
+- name: Create tomcat instances directory ("{{ tomcat_instances_dir }}")
+  file:
+    path: '{{ tomcat_instances_dir }}'
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
 
-
-- name: Configure service file. Multi-instances. {{ tomcat_instance.app_name }}
-  template:
-    src: "multi-instance.service.j2"
-    dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instance.app_name }}-{{ tomcat_instance.instance_name }}.service
-
-- name: Set values for Multi-instances. App2
-  set_fact:
-    tomcat_instance:
-      app_name: "app2"
-      instance_name:  "{{ tomcat_instances.app2.instance_name }}"
-      port_connector: "{{ tomcat_instances.app2.port_connector }}"
-      port_shutdown:  "{{ tomcat_instances.app2.port_shutdown }}"
-      jvm_xms:        "{{ tomcat_instances.app2.jvm_xms }}"
-      jvm_xmx:        "{{ tomcat_instances.app2.jvm_xmx }}"
-
-- name: Configure service file. Multi-instances. {{ tomcat_instance.app_name }}
-  template:
-    src: "multi-instance.service.j2"
-    dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instance.app_name }}-{{ tomcat_instance.instance_name }}.service
-
-- name: Configure service file {{ tomcat_service_name }}.service
-  template:
-    src: "single-instance.service.j2"
-    dest: /usr/lib/systemd/system/{{ tomcat_service_name }}.service
-  notify: restart tomcat
-
-- name: Enable tomcat service on startup
-  systemd:
-    name: "{{ tomcat_service_name }}"
-    enabled: yes
-    daemon_reload: yes
+- name: Configure each instance
+  include_tasks: settings-instance.yml
+  with_items: "{{ tomcat_instances }}"
+  loop_control:
+    loop_var: application
