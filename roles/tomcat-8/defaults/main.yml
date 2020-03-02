@@ -1,21 +1,24 @@
 ---
-# defaults values
-
 tomcat_version: 8.5.51
-
-tomcat_port_connector: 8090
-tomcat_port_shutdown:  8005
-tomcat_port_redirect:  8443
-tomcat_port_ajp:       8009
-
 tomcat_java_home: /usr/lib/jvm/java-11-openjdk
 
-# 2% of the total system memory
-tomcat_jvm_memory_xms: "{{ ansible_memtotal_mb * 2//100 }}"
-tomcat_jvm_memory_xmx: "{{ ansible_memtotal_mb * 2//100 }}"
+tomcat_instances:
+  app1:
+    instance_name: i01
+    port_connector: 8091
+    port_shutdown:  8191
+    jvm_xms: 110
+    jvm_xmx: 110
+  app2:
+    instance_name: i02
+    port_connector: 8092
+    port_shutdown:  8192
+    jvm_xms: 120
+    jvm_xmx: 120
 
-#tomcat_jvm_memory_xms: 100
-#tomcat_jvm_memory_xmx: 100
+# Sample. 2% of the total system memory
+# tomcat_jvm_memory_xms: "{{ ansible_memtotal_mb * 2//100 }}"
+# tomcat_jvm_memory_xmx: "{{ ansible_memtotal_mb * 2//100 }}"
 
-tomcat_debug_mode: False
-# tomcat_port_debug: 8000
+tomcat_jvm_memory_xms: 100
+tomcat_jvm_memory_xmx: 100

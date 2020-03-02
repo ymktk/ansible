@@ -1,20 +1,18 @@
 ---
-# vars file for tomcat-8
+tomcat_install_dir: /opt
+tomcat_symlink: tomcat
+tomcat_user:    tomcat
+tomcat_group:   tomcat
 
-tomcat_service_name: tomcat
-
-tomcat_user:  tomcat
-tomcat_group: tomcat
-
-tomcat_install_path: /opt
-
-tomcat_major_version:   "{{ tomcat_version.split('.')[0].tomcat_version.split('.')[1] }}"
-tomcat_template_server: "tomcat-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
+tomcat_major_version: "{{ tomcat_version.split('.')[0].tomcat_version.split('.')[1] }}"
+template_server_xml:  "server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
 
 tomcat_listen_address: 0.0.0.0
 
-tomcat_download_URL: https://archive.apache.org/dist
-tomcat_download_dir: /tmp/downloads
+tomcat_download_URL:  https://archive.apache.org/dist
+tomcat_download_dir:  /var/tmp/downloads
+tomcat_pid_dir:       /var/run/tomcats
+tomcat_instances_dir: /var/lib/tomcats
 
 tomcat_unnecessary_default_apps:
   # - ROOT
@@ -22,3 +20,11 @@ tomcat_unnecessary_default_apps:
   - examples
   - host-manager
   - manager
+
+tomcat_necessary_default_conf_files:
+  - catalina.policy
+  - catalina.properties
+  - context.xml
+  - jaspic-providers.xml
+  - jaspic-providers.xsd
+  - web.xml
