@@ -9,7 +9,7 @@
       - initscripts #need?
     state: installed
 
-- name: "start-jenkins"
+- name: "start"
   debug:
     msg: "START"
 

@@ -2,8 +2,8 @@
 # roleで利用される変数を定義
 # 基本的に環境毎に変わる固定値などを記述し、group_varsなどで変数を上書しない
 
-jenkins_user:    jenkins
-jenkins_group:   jenkins
+jenkins_user:     jenkins
+jenkins_group:    jenkins
 
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
 jenkins_download_dir: /var/tmp/downloads
@@ -22,5 +22,3 @@ tomcat_necessary_default_conf_files:
   - jaspic-providers.xml
   - jaspic-providers.xsd
   - web.xml
-
-# jenkins_init_file: /etc/sysconfig/jenkins

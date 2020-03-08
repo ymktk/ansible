@@ -1,4 +1,12 @@
 ---
+# Service user permission
+- name: Add {{ jenkins_user }} into tomcat group
+  user:
+    name: "{{ jenkins_user }}"
+    groups:
+      - "tomcat"
+    append: yes
+
 
 # Setup as a tomcat instance
 
@@ -55,10 +63,15 @@
     src:  "instance-server-9.0.xml.j2"
     dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml"
 
-- name: Update service setting
+- name: systemd service setting
   template:
     src: "instance-service.j2"
     dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
+
+- name: systemd daemon_reload
+  systemd:
+    name: "{{ jenkins_instance_name }}"
+    daemon_reload: yes
 
 
 # Setup jenkins_home
@@ -105,52 +118,3 @@
   when:
     - jenkins_proxy_host | length > 0
     - jenkins_proxy_port | length > 0
-
-
-# - name: Check if jenkins_init_file exists.
-#   stat:
-#     path:   "{{ jenkins_init_file }}"
-#   register: jenkins_init_file_stat
-
-# - name: Ensure jenkins_init_file exists.
-#   file:
-#     path: "{{ jenkins_init_file }}"
-#     state: touch
-#   when: not jenkins_init_file_stat.stat.exists
-
-# - name: Set the Jenkins home directory.
-#   lineinfile:
-#     dest:   "{{ jenkins_init_file }}"
-#     regexp: '^JENKINS_HOME=.*'
-#     line:   'JENKINS_HOME={{ jenkins_home }}'
-#   register: jenkins_home_config
-
-# - name: Set HTTP port in Jenkins config.
-#   lineinfile:
-#     backrefs: true
-#     dest: "{{ jenkins_init_file }}"
-#     regexp: '^{{ jenkins_config_key_http_port }}='
-#     line: '{{ jenkins_config_key_http_port }}={{ jenkins_http_port }}'
-#   register: jenkins_http_config
-
-# - name: Modify variables in init file.
-#   lineinfile:
-#     dest: "{{ jenkins_init_file }}"
-#     insertafter: '^{{ item.option }}='
-#     regexp: '^{{ item.option }}=\"\${{ item.option }} '
-#     line: '{{ item.option }}="${{ item.option }} {{ item.value }}"'
-#     state: present
-#   with_items: "{{ jenkins_init_changes }}"
-#   register: jenkins_init_prefix
-
-# - name: Trigger handlers immediately in case Jenkins was installed
-#   meta: flush_handlers
-
-# - name: Immediately restart Jenkins on http or user changes.
-#   service: name=jenkins state=restarted
-#   when: >
-#     (jenkins_users_config is defined and jenkins_users_config.changed)
-#     or (jenkins_http_config is defined and jenkins_http_config.changed)
-#     or (jenkins_home_config is defined and jenkins_home_config.changed)
-#     or (jenkins_proxy_config is defined and jenkins_proxy_config.changed)
-#   tags: ['skip_ansible_lint']
