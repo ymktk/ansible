@@ -2,7 +2,7 @@
   debug:
     msg: "Instance: {{ tomcat_instances[application].instance_name }}"
 
-- name: Create directories under "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}"
+- name: mkdir under "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}"
   file:
     path:  "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/{{ item }}"
     state: directory
@@ -14,7 +14,7 @@
     - "webapps"
     - "work"
 
-- name: Create log directory /var/log/tomcats/"{{ tomcat_instances[application].instance_name }}"
+- name: mkdir /var/log/tomcats/{{ tomcat_instances[application].instance_name }}
   file:
     path:  "/var/log/tomcats/{{ tomcat_instances[application].instance_name }}"
     state: directory
@@ -30,7 +30,7 @@
     group: "{{ tomcat_group }}"
   with_items: "{{ tomcat_necessary_default_conf_files }}"
 
-- name: Copy sample application "ROOT" from catalina_home
+- name: "For DEMO" Copy sample application "ROOT" from catalina_home
   copy:
     remote_src: yes
     src:   "{{ tomcat_install_dir }}/{{ tomcat_symlink }}/webapps/ROOT"
@@ -47,9 +47,8 @@
   template:
     src:  "{{ template_server_xml }}"
     dest: "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/conf/server.xml"
-  # notify: restart tomcat
 
-- name: Update service file
+- name: Update service setting
   template:
     src: "instance-service.j2"
     dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instances[application].instance_name }}.service
