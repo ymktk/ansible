@@ -1,17 +1,17 @@
-- name: Create group "{{ tomcat_group }}"
+- name: "Create group {{ tomcat_group }}"
   group:
     name: "{{ tomcat_group }}"
     gid:  "{{ tomcat_group_gid | default(omit) }}"
     state: present
 
-- name: Create user "{{ tomcat_user }}"
+- name: "Create user {{ tomcat_user }}"
   user:
     name:  "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     uid:   "{{ tomcat_user_uid | default(omit) }}"
     state: present
 
-- name: Create temp download directory ("{{ tomcat_download_dir }}")
+- name: "mkdir {{ tomcat_download_dir }}"
   file:
     path:  "{{ tomcat_download_dir }}"
     state: directory
