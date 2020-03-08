@@ -8,6 +8,9 @@ jenkins_group:   jenkins
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
 jenkins_download_dir: /var/tmp/downloads
 jenkins_home_dir:     /var/jenkins_home
+jenkins_work_dir:     /var/jenkins_workspace
+
+tomcat_instances_dir: /var/lib/tomcats
 
 # jenkins_init_file: /etc/sysconfig/jenkins
 

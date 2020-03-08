@@ -1,4 +1,11 @@
 ---
+- name: Ensure {{ tomcat_instances_dir }}/{{ jenkins_user }} exists
+  file:
+    path:  "{{ tomcat_instances_dir }}/{{ jenkins_user }}"
+    state: directory
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+
 - name: Ensure jenkins_home {{ jenkins_home_dir }} exists
   file:
     path:  "{{ jenkins_home_dir }}"
@@ -8,7 +15,21 @@
     mode:  u+rwx
     follow: true
 
-- name: Create custom init scripts directory.
+- name: Ensure {{ jenkins_work_dir }} exists
+  file:
+    path:  "{{ jenkins_work_dir }}"
+    state: directory
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode:  0775
+
+- name: Ensure symlink {{ jenkins_home_dir }}/workspace to {{ jenkins_work_dir }} exists
+  file:
+    src:   "{{ jenkins_work_dir }}"
+    dest:  "{{ jenkins_home_dir }}/workspace"
+    state: link
+
+- name: Ensure custom init scripts directory exists
   file:
     path:  "{{ jenkins_home_dir }}/init.groovy.d"
     state: directory
