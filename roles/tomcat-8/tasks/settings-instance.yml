@@ -34,7 +34,7 @@
     group: "{{ tomcat_group }}"
   with_items: "{{ tomcat_necessary_default_conf_files }}"
 
-- name: "For DEMO" Copy sample application "ROOT" from catalina_home
+- name: "(For DEMO) Copy sample application 'ROOT' from catalina_home"
   tags: [ never, setup-instances ]
   copy:
     remote_src: yes
