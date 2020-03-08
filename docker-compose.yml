@@ -24,7 +24,7 @@ services:
     privileged: true
 
   app:
-    image: ymktk/centos-systemd:openjdk-11
+    image: ymktk/centos-systemd:tomcat-9.0
     container_name: app
     working_dir: "/opt"
     volumes:
