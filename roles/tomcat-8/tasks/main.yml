@@ -2,13 +2,14 @@
 # tasks file for tomcat-8
 
 - name: Unarchive tomcat.tar.gz
-  include_tasks: install.yml
+  import_tasks: install.yml
 
 - name: Setup tomcat (common)
-  include_tasks: settings.yml
+  import_tasks: settings.yml
 
 - name: Setup tomcat (Each instance)
   include_tasks: settings-instance.yml
+  tags: [ never, setup-instances ]
   with_items: "{{ tomcat_instances }}"
   loop_control:
     loop_var: application

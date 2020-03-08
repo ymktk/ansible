@@ -1,8 +1,10 @@
 - name: "Application: {{ application }} ==> Instance: {{ tomcat_instances[application].instance_name }}"
+  tags: [ never, setup-instances ]
   debug:
     msg: "Instance: {{ tomcat_instances[application].instance_name }}"
 
 - name: mkdir under "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}"
+  tags: [ never, setup-instances ]
   file:
     path:  "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/{{ item }}"
     state: directory
@@ -15,6 +17,7 @@
     - "work"
 
 - name: mkdir /var/log/tomcats/{{ tomcat_instances[application].instance_name }}
+  tags: [ never, setup-instances ]
   file:
     path:  "/var/log/tomcats/{{ tomcat_instances[application].instance_name }}"
     state: directory
@@ -22,6 +25,7 @@
     group: "{{ tomcat_group }}"
 
 - name: Copy default conf files from catalina_home
+  tags: [ never, setup-instances ]
   copy:
     remote_src: yes
     src:   "{{ tomcat_install_dir }}/{{ tomcat_symlink }}/conf/{{ item }}"
@@ -31,6 +35,7 @@
   with_items: "{{ tomcat_necessary_default_conf_files }}"
 
 - name: "For DEMO" Copy sample application "ROOT" from catalina_home
+  tags: [ never, setup-instances ]
   copy:
     remote_src: yes
     src:   "{{ tomcat_install_dir }}/{{ tomcat_symlink }}/webapps/ROOT"
@@ -39,16 +44,19 @@
     group: "{{ tomcat_group }}"
 
 - name: Update logging.properties
+  tags: [ never, setup-instances ]
   template:
     src:  "logging-properties.j2"
     dest: "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/conf/logging.properties"
 
 - name: Update server.xml
+  tags: [ never, setup-instances ]
   template:
     src:  "{{ template_server_xml }}"
     dest: "{{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/conf/server.xml"
 
 - name: Update service setting
+  tags: [ never, setup-instances ]
   template:
     src: "instance-service.j2"
     dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instances[application].instance_name }}.service

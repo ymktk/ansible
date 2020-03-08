@@ -94,8 +94,15 @@ ansible-playbook -i inventory playbook-build-jenkins-master.yml -vvv
 # Run for Jenkins plugins
 # ansible-playbook -i inventory playbook-jenkins-plugins.yml -vvv
 
-# Install tomcat 8
-ansible-playbook -i inventory playbook-build-tomcat-8.yml -vv
+# tomcat 8
+#   Unarchive tomcat.tar.gz + Setup tomcat (common)
+ansible-playbook -i inventory playbook-build-tomcat-install.yml --list-tasks
+ansible-playbook -i inventory playbook-build-tomcat-install.yml -vv
+
+#   Setup tomcat (Each instance)
+ansible-playbook -i inventory playbook-build-tomcat-install.yml --tags "setup-instances" --list-tasks
+ansible-playbook -i inventory playbook-build-tomcat-install.yml --tags "setup-instances" -vv
+
 
 # 3-2. Target server
 docker exec -it app bash
