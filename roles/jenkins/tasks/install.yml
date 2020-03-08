@@ -11,7 +11,14 @@
     uid:   "{{ jenkins_user_uid | default(omit) }}"
     state: present
 
-- name: "mkdir {{ jenkins_download_dir }}"
+- name: "mkdir {{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}"
   file:
-    path:  "{{ jenkins_download_dir }}"
+    path:  "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}"
     state: directory
+
+- name: "Download jenkins.war ver.{{ jenkins_version }}"
+  get_url:
+    url:       "{{ jenkins_download_URL }}/{{ jenkins_version }}/jenkins.war"
+    dest:      "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}/jenkins.war"
+    sha256sum: "{{ jenkins_war_sha256 }}"
+    timeout: 120
