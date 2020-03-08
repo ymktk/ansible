@@ -4,4 +4,4 @@
   become: yes
   roles:
     # - java # Dependency is defined in meta/main.yml
-    - jenkins-master
+    - jenkins
