@@ -31,9 +31,3 @@
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
-
-- name: Configure each instance
-  include_tasks: settings-instance.yml
-  with_items: "{{ tomcat_instances }}"
-  loop_control:
-    loop_var: application

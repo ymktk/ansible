@@ -12,7 +12,7 @@ services:
     tty: true # Can keep running
 
   jenkins:
-    image: centos-systemd_server
+    image: ymktk/centos-systemd:openjdk-11
     container_name: jk
     working_dir: "/tmp"
     volumes:
@@ -24,7 +24,7 @@ services:
     privileged: true
 
   app:
-    image: centos-systemd_server
+    image: ymktk/centos-systemd:openjdk-11
     container_name: app
     working_dir: "/opt"
     volumes:
