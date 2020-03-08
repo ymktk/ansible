@@ -5,7 +5,7 @@ tomcat_user:    tomcat
 tomcat_group:   tomcat
 
 tomcat_major_version: "{{ tomcat_version.split('.')[0].tomcat_version.split('.')[1] }}"
-template_server_xml:  "server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
+template_server_xml:  "instance-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
 
 tomcat_listen_address: 0.0.0.0
 

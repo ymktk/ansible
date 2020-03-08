@@ -51,7 +51,7 @@
 
 - name: Update service file
   template:
-    src: "tomcat.service.j2"
+    src: "instance-service.j2"
     dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instances[application].instance_name }}.service
   # notify: restart tomcat
 
