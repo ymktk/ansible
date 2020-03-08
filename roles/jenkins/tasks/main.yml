@@ -2,5 +2,5 @@
   debug:
     msg: "START"
 
-- name: Unarchive jenkins.war
-  import_tasks: install.yml
+- name: Download jenkins.war
+  import_tasks: download.yml
