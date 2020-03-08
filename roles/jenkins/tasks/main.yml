@@ -1,2 +1,6 @@
+- name: "start-jenkins"
+  debug:
+    msg: "START"
+
 - name: Unarchive jenkins.war
   import_tasks: install.yml
