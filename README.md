@@ -100,6 +100,9 @@ ansible-playbook -i inventory playbook-build-tomcat-8.yml -vv
 # 3-2. Target server
 docker exec -it app bash
 
+# Confirm service list
+ls -ltr /usr/lib/systemd/system/
+
 ```
 
 # Links
