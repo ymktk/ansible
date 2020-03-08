@@ -17,7 +17,7 @@ services:
     working_dir: "/tmp"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /c/Users/Public/docker-shared/data-jenkins:/data
+      - /c/Users/Public/docker-shared/downloads:/var/tmp/downloads
       - /c/Users/Public/docker-shared:/tmp/shared
     ports:
       - "8082:8082"
@@ -29,6 +29,7 @@ services:
     working_dir: "/opt"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /c/Users/Public/docker-shared/downloads:/var/tmp/downloads
     ports:
       - "8090:8090"
       - "8091:8091"
