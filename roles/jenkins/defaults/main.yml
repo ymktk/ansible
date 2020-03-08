@@ -6,7 +6,6 @@
 jenkins_version:    "2.204.5"
 jenkins_war_sha256: "94c73fa5b72e0a4eb52c5c99c08351f85a51d138f3dbaff6f64e4406353f839c"
 
-jenkins_home: /data/jenkins
 jenkins_http_port: 8082
 
 # If Jenkins is behind a proxy
@@ -19,9 +18,6 @@ jenkins_proxy_noproxy:
 jenkins_admin_username: jkadmin
 jenkins_admin_password: jkadmin
 
-jenkins_process_user:  jenkins
-jenkins_process_group: "{{ jenkins_process_user }}"
-
 jenkins_url_prefix:   "/jenkins"
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Singapore"
 
@@ -32,7 +28,7 @@ jenkins_init_changes:
   - option: "{{ jenkins_config_key_java_options }}"
     value:  "{{ jenkins_java_options }}"
 
-jenkins_cli_jar_file: /opt/jenkins-cli.jar
+# jenkins_cli_jar_file: /opt/jenkins-cli.jar
 jenkins_hostname: localhost
 jenkins_connection_delay: 5
 jenkins_connection_retries: 60
