@@ -24,6 +24,3 @@ tomcat_necessary_default_conf_files:
   - web.xml
 
 # jenkins_init_file: /etc/sysconfig/jenkins
-
-# jenkins_config_key_http_port:    JENKINS_PORT
-# jenkins_config_key_java_options: JENKINS_JAVA_OPTIONS
