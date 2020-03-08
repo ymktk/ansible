@@ -11,7 +11,6 @@ tomcat_listen_address: 0.0.0.0
 
 tomcat_download_URL:  https://archive.apache.org/dist
 tomcat_download_dir:  /var/tmp/downloads
-tomcat_pid_dir:       /var/run/tomcats
 tomcat_instances_dir: /var/lib/tomcats
 
 tomcat_unnecessary_default_apps:

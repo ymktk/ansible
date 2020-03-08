@@ -10,10 +10,16 @@
     group: "{{ tomcat_group }}"
   with_items:
     - "conf"
-    - "logs"
     - "temp"
     - "webapps"
     - "work"
+
+- name: Create log directory /var/log/tomcats/"{{ tomcat_instances[application].instance_name }}"
+  file:
+    path:  "/var/log/tomcats/{{ tomcat_instances[application].instance_name }}"
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
 
 - name: Copy default conf files from catalina_home
   copy:
@@ -46,11 +52,11 @@
 - name: Update service file
   template:
     src: "tomcat.service.j2"
-    dest: /usr/lib/systemd/system/tomcat-{{ application }}-{{ tomcat_instances[application].instance_name }}.service
+    dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instances[application].instance_name }}.service
   # notify: restart tomcat
 
-- name: Enable tomcat service on startup
-  systemd:
-    name: "tomcat-{{ application }}-{{ tomcat_instances[application].instance_name }}"
-    enabled: yes
-    daemon_reload: yes
+# - name: Enable tomcat service on startup
+#   systemd:
+#     name: "tomcat-{{ application }}-{{ tomcat_instances[application].instance_name }}"
+#     enabled: yes
+#     daemon_reload: yes
