@@ -2,16 +2,16 @@
 
 # Setup as a tomcat instance
 
-- name: Ensure {{ tomcat_instances_dir }}/{{ jenkins_user }} exists
+- name: Ensure {{ tomcat_instances_dir }}/{{ jenkins_instance_name }} exists
   file:
-    path:  "{{ tomcat_instances_dir }}/{{ jenkins_user }}"
+    path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}"
     state: directory
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
 
-- name: Ensure necessary dirs in {{ tomcat_instances_dir }}/{{ jenkins_user }}
+- name: Ensure necessary dirs in {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}
   file:
-    path:  "{{ tomcat_instances_dir }}/{{ jenkins_user }}/{{ item }}"
+    path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/{{ item }}"
     state: directory
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
@@ -21,9 +21,9 @@
     - "webapps"
     - "work"
 
-- name: Ensure /var/log/tomcats/{{ jenkins_user }} exists
+- name: Ensure /var/log/tomcats/{{ jenkins_instance_name }} exists
   file:
-    path:  /var/log/tomcats/{{ jenkins_user }}
+    path:  /var/log/tomcats/{{ jenkins_instance_name }}
     state: directory
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
@@ -32,7 +32,7 @@
   copy:
     remote_src: yes
     src:   "{{ tomcat_catalina_dir }}/conf/{{ item }}"
-    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_user }}/conf/"
+    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/"
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
   with_items: "{{ tomcat_necessary_default_conf_files }}"
@@ -41,9 +41,24 @@
   copy:
     remote_src: yes
     src:   "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}/jenkins.war"
-    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_user }}/webapps/"
+    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/webapps/"
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
+
+- name: Update logging.properties
+  template:
+    src:  "logging-properties.j2"
+    dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties"
+
+- name: Update server.xml
+  template:
+    src:  "instance-server-9.0.xml.j2"
+    dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml"
+
+- name: Update service setting
+  template:
+    src: "instance-service.j2"
+    dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
 
 
 # Setup jenkins_home
@@ -90,21 +105,6 @@
   when:
     - jenkins_proxy_host | length > 0
     - jenkins_proxy_port | length > 0
-
-- name: Update logging.properties
-  template:
-    src:  "logging-properties.j2"
-    dest: "{{ tomcat_instances_dir }}/{{ jenkins_user }}/conf/logging.properties"
-
-- name: Update server.xml
-  template:
-    src:  "instance-server-9.0.xml.j2"
-    dest: "{{ tomcat_instances_dir }}/{{ jenkins_user }}/conf/server.xml"
-
-- name: Update service setting
-  template:
-    src: "instance-service.j2"
-    dest: /usr/lib/systemd/system/{{ jenkins_user }}.service
 
 
 # - name: Check if jenkins_init_file exists.
