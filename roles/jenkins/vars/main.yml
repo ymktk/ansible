@@ -10,7 +10,18 @@ jenkins_download_dir: /var/tmp/downloads
 jenkins_home_dir:     /var/jenkins_home
 jenkins_work_dir:     /var/jenkins_workspace
 
-tomcat_instances_dir: /var/lib/tomcats
+tomcat_catalina_dir:   /opt/tomcat
+tomcat_instances_dir:  /var/lib/tomcats
+tomcat_java_home:      /usr/lib/jvm/java-11-openjdk
+tomcat_listen_address: 0.0.0.0
+
+tomcat_necessary_default_conf_files:
+  - catalina.policy
+  - catalina.properties
+  - context.xml
+  - jaspic-providers.xml
+  - jaspic-providers.xsd
+  - web.xml
 
 # jenkins_init_file: /etc/sysconfig/jenkins
 

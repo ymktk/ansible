@@ -1,0 +1,26 @@
+# Systemd unit file for tomcat
+[Unit]
+Description=Jenkins {{ jenkins_version }}
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME={{ tomcat_java_home }}
+Environment=CATALINA_HOME={{ tomcat_catalina_dir }}
+
+Environment=CATALINA_BASE={{ tomcat_instances_dir }}/{{ jenkins_user }}
+Environment=CATALINA_PID={{ tomcat_instances_dir }}/{{ jenkins_user }}/catalina.pid
+Environment=CATALINA_OUT=/var/log/tomcats/{{ jenkins_user }}/catalina.out
+
+Environment='CATALINA_OPTS=-Xms{{ jenkins_jvm_xms }}M -Xmx{{ jenkins_jvm_xmx }}M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+ExecStart={{ tomcat_catalina_dir }}/bin/startup.sh
+ExecStop={{ tomcat_catalina_dir }}/bin/shutdown.sh
+
+User={{ jenkins_user }}
+Group={{ jenkins_group }}
+
+[Install]
+WantedBy=multi-user.target
