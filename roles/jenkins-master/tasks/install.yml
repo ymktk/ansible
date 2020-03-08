@@ -1,0 +1,17 @@
+- name: "Create group {{ jenkins_group }}"
+  group:
+    name: "{{ jenkins_group }}"
+    gid:  "{{ jenkins_group_gid | default(omit) }}"
+    state: present
+
+- name: "Create user {{ jenkins_user }}"
+  user:
+    name:  "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    uid:   "{{ jenkins_user_uid | default(omit) }}"
+    state: present
+
+- name: "mkdir {{ jenkins_download_dir }}"
+  file:
+    path:  "{{ jenkins_download_dir }}"
+    state: directory

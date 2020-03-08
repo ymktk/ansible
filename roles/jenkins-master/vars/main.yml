@@ -2,12 +2,11 @@
 # roleで利用される変数を定義
 # 基本的に環境毎に変わる固定値などを記述し、group_varsなどで変数を上書しない
 
-jenkins_repo_url:     https://pkg.jenkins.io/redhat-stable/jenkins.repo
-jenkins_repo_key_url: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-jenkins_pkg_url:      https://pkg.jenkins.io/redhat
+jenkins_user:    jenkins
+jenkins_group:   jenkins
 
-jenkins_repo_file: /etc/yum.repos.d/jenkins.repo
-jenkins_init_file: /etc/sysconfig/jenkins
+jenkins_download_URL:  https://archive.apache.org/dist
+jenkins_download_dir:  /var/tmp/downloads
 
 jenkins_config_key_http_port:    JENKINS_PORT
 jenkins_config_key_java_options: JENKINS_JAVA_OPTIONS
