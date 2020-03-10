@@ -121,15 +121,15 @@
 - name: Disable Setup wizard
   copy:
     content: "{{ jenkins_version }}"
-    dest:  "{{ jenkins_home_dir }}/jenkins.install.InstallUtil.lastExecVersion"
-    owner: jenkins
-    group: jenkins
-    mode: 0644
+    dest:    "{{ jenkins_home_dir }}/jenkins.install.InstallUtil.lastExecVersion"
+    owner:   "{{ jenkins_user }}"
+    group:   "{{ jenkins_group }}"
+    mode:    0644
 
 - name: Disable Upgrade wizard
   copy:
     content: "{{ jenkins_version }}"
-    dest:  "{{ jenkins_home_dir }}/jenkins.install.UpgradeWizard.state"
-    owner: jenkins
-    group: jenkins
-    mode: 0644
+    dest:    "{{ jenkins_home_dir }}/jenkins.install.UpgradeWizard.state"
+    owner:   "{{ jenkins_user }}"
+    group:   "{{ jenkins_group }}"
+    mode:    0644
