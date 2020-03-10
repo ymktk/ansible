@@ -60,6 +60,16 @@ jenkins_plugin_names:
   - "pipeline-model-declarative-agent" # Deprecated!!!
   - "pipeline-stage-tags-metadata"
   - "pipeline-model-definition" # Pipeline: Declarative
+  - "token-macro"
+  - "junit"
+  - "matrix-project"
+  - "run-condition"
+  - "javadoc"
+  - "maven-plugin"
+  - "conditional-buildstep"
+  - "parameterized-trigger"
+  - "promoted-builds"
+  - "git"
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats
