@@ -7,8 +7,8 @@ jenkins_group: jenkins
 
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
 jenkins_download_dir: /var/tmp/downloads
-jenkins_home_dir:     /var/jenkins_home
-jenkins_work_dir:     /var/jenkins_workspace
+jenkins_home_dir:     /var/lib/jenkins_home
+jenkins_work_dir:     /var/lib/jenkins_workspace
 
 jenkins_plugin_names:
   - "trilead-api"
@@ -20,7 +20,7 @@ jenkins_plugin_names:
   - "workflow-api"      # Pipeline: API
   - "display-url-api"
   - "mailer"
-  - "command-launcher"
+  - "command-launcher" # Command Agent Launcher
   - "script-security"
   - "workflow-support"  # Pipeline: Supporting APIs
   - "durable-task"
@@ -29,12 +29,37 @@ jenkins_plugin_names:
   - "workflow-basic-steps" # Pipeline: Basic Steps
   - "configuration-as-code"
   - "credentials"
+  - "plain-credentials"
   - "cloudbees-folder" # Folders
   - "ssh-credentials"
   - "jsch" # JSch dependency
   - "git-client"
   - "git-server"
-# - "pipeline-stage-tags-metadata"  # https://plugins.jenkins.io/pipeline-stage-tags-metadata/
+  - "workflow-scm-step" # Pipeline: SCM Step
+  - "variant"
+  - "jackson2-api"
+  - "metrics"
+  - "bouncycastle-api"
+  - "async-http-client"
+  - "support-core"
+  - "ace-editor" # JavaScript GUI Lib: ACE Editor bundle
+  - "jquery-detached" # JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
+  - "workflow-cps" # Pipeline: Groovy
+  - "workflow-cps-global-lib" # Pipeline: Shared Groovy Libraries
+  - "workflow-job" # Pipeline: Job
+  - "branch-api"
+  - "workflow-multibranch" # Pipeline: Multibranch
+  - "credentials-binding"
+  - "pipeline-stage-step"
+  - "pipeline-model-api"
+  - "pipeline-model-extensions" # Pipeline: Declarative Extension Points API
+  - "authentication-tokens"
+  - "docker-commons"
+  - "docker-workflow" # Docker Pipeline
+  - "pipeline-input-step"
+  - "pipeline-model-declarative-agent" # Deprecated!!!
+  - "pipeline-stage-tags-metadata"
+  - "pipeline-model-definition" # Pipeline: Declarative
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats
