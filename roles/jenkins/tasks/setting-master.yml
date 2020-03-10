@@ -1,6 +1,6 @@
 ---
 # Service user permission
-- name: Add {{ jenkins_user }} into tomcat group
+- name: usermod -aG tomcat {{ jenkins_user }}
   user:
     name: "{{ jenkins_user }}"
     groups:
@@ -9,8 +9,14 @@
 
 
 # Setup as a tomcat instance
+- name: Ensure /var/log/tomcats/{{ jenkins_instance_name }} exists
+  file:
+    path:  /var/log/tomcats/{{ jenkins_instance_name }}
+    state: directory
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
 
-- name: Ensure {{ tomcat_instances_dir }}/{{ jenkins_instance_name }} exists
+- name: Ensure instance directory({{ tomcat_instances_dir }}/{{ jenkins_instance_name }}) exists
   file:
     path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}"
     state: directory
@@ -29,14 +35,7 @@
     - "webapps"
     - "work"
 
-- name: Ensure /var/log/tomcats/{{ jenkins_instance_name }} exists
-  file:
-    path:  /var/log/tomcats/{{ jenkins_instance_name }}
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-
-- name: Copy default conf files from {{ tomcat_catalina_dir }}/conf
+- name: Copy default conf files from {{ tomcat_catalina_dir }}/conf to {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/
   copy:
     remote_src: yes
     src:   "{{ tomcat_catalina_dir }}/conf/{{ item }}"
@@ -45,7 +44,7 @@
     group: "{{ jenkins_group }}"
   with_items: "{{ tomcat_necessary_default_conf_files }}"
 
-- name: Copy jenkins.war from {{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}
+- name: Copy jenkins.war from {{ jenkins_download_dir }}/jenkins-{{ jenkins_version }} to {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/webapps/
   copy:
     remote_src: yes
     src:   "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}/jenkins.war"
@@ -53,17 +52,17 @@
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
 
-- name: Update logging.properties
+- name: Update {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties
   template:
     src:  "logging-properties.j2"
     dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties"
 
-- name: Update server.xml
+- name: Update {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml
   template:
     src:  "instance-server-9.0.xml.j2"
     dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml"
 
-- name: systemd service setting
+- name: Update /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
   template:
     src: "instance-service.j2"
     dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
