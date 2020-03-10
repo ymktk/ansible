@@ -19,11 +19,8 @@ jenkins_proxy_noproxy:
   - "127.0.0.1"
   - "localhost"
 
-# jenkins_connection_delay: 5
-# jenkins_connection_retries: 60
-
 # To install plugins
 jenkins_hostname: localhost
-jenkins_admin_username: jkadmin
+jenkins_admin_username: admin
 jenkins_admin_password: jkadmin
 jenkins_timeout: 60
