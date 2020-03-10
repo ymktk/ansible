@@ -8,6 +8,7 @@ services:
 
     volumes:
       - /c/Users/Public/repos/ansible:/home/ansible/code
+      - /c/Users/Public/docker-shared/downloads:/home/ansible/downloads
       - /c/Users/Public/docker-shared:/tmp/shared
     tty: true # Can keep running
 
