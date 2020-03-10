@@ -1,2 +1,16 @@
 - name: "plugins"
   debug: msg="plugins"
+
+# https://docs.ansible.com/ansible/latest/modules/jenkins_plugin_module.html
+
+- name: Install plugins
+  jenkins_plugin:
+    name:         "{{ item }}"
+    jenkins_home: "{{ jenkins_home_dir }}"
+    owner:        "{{ jenkins_user }}"
+    group:        "{{ jenkins_group }}"
+    url_username: "{{ jenkins_admin_username }}"
+    url_password: "{{ jenkins_admin_password }}"
+    url:          http://{{ jenkins_hostname }}:{{ jenkins_http_port }}/jenkins
+    timeout:      "{{ jenkins_timeout }}"
+  with_items:     "{{ jenkins_plugin_names }}"

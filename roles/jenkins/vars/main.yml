@@ -2,13 +2,39 @@
 # roleで利用される変数を定義
 # 基本的に環境毎に変わる固定値などを記述し、group_varsなどで変数を上書しない
 
-jenkins_user:     jenkins
-jenkins_group:    jenkins
+jenkins_user:  jenkins
+jenkins_group: jenkins
 
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
 jenkins_download_dir: /var/tmp/downloads
 jenkins_home_dir:     /var/jenkins_home
 jenkins_work_dir:     /var/jenkins_workspace
+
+jenkins_plugin_names:
+  - "trilead-api"
+  - "jaxb"
+  - "jdk-tool"
+  - "structs"
+  - "scm-api"
+  - "workflow-step-api" # Pipeline: Step API
+  - "workflow-api"      # Pipeline: API
+  - "display-url-api"
+  - "mailer"
+  - "command-launcher"
+  - "script-security"
+  - "workflow-support"  # Pipeline: Supporting APIs
+  - "durable-task"
+  - "workflow-durable-task-step" # Pipeline: Nodes and Processes
+  - "apache-httpcomponents-client-4-api"
+  - "workflow-basic-steps" # Pipeline: Basic Steps
+  - "configuration-as-code"
+  - "credentials"
+  - "cloudbees-folder" # Folders
+  - "ssh-credentials"
+  - "jsch" # JSch dependency
+  - "git-client"
+  - "git-server"
+# - "pipeline-stage-tags-metadata"  # https://plugins.jenkins.io/pipeline-stage-tags-metadata/
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats
