@@ -117,3 +117,19 @@
   when:
     - jenkins_proxy_host | length > 0
     - jenkins_proxy_port | length > 0
+
+- name: Disable Setup wizard
+  copy:
+    content: "{{ jenkins_version }}"
+    dest:  "{{ jenkins_home_dir }}/jenkins.install.InstallUtil.lastExecVersion"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+
+- name: Disable Upgrade wizard
+  copy:
+    content: "{{ jenkins_version }}"
+    dest:  "{{ jenkins_home_dir }}/jenkins.install.UpgradeWizard.state"
+    owner: jenkins
+    group: jenkins
+    mode: 0644
