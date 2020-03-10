@@ -3,7 +3,7 @@ version: '3.7'
 services:
   control:
     image: ansible_controller
-    container_name: con
+    container_name: ansible
     working_dir: "/home/ansible"
 
     volumes:
@@ -12,7 +12,7 @@ services:
     tty: true # Can keep running
 
   jenkins:
-    image: ymktk/centos-systemd:openjdk-11
+    image: ymktk/centos-systemd:jenkins
     container_name: jk
     working_dir: "/tmp"
     volumes:
