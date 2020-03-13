@@ -108,8 +108,10 @@ ansible-playbook -i inventory playbook-build-tomcat.yml --tags "setup-instances"
 # 3-2. Target server
 docker exec -it app bash
 
-# Confirm service list
 ls -ltr /usr/lib/systemd/system/
+
+systemctl start tomcat-i01.service
+systemctl start tomcat-i02.service
 
 ```
 
@@ -117,6 +119,8 @@ ls -ltr /usr/lib/systemd/system/
 
     - http://localhost:8083/jenkins/
     - http://localhost:8081/artifactory/
+    - tomcat instance1 http://localhost:8091/
+    - tomcat instance2 http://localhost:8092/
 
 # Links
 
