@@ -48,8 +48,6 @@ services:
     ports:
       - "1433:1433"
 
-  # http://localhost:8081/artifactory
-  # docker exec -it artifactory /bin/bash
   artifactory:
     image: docker.bintray.io/jfrog/artifactory-oss:7.2.1
     container_name: artifactory
