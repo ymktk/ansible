@@ -18,8 +18,8 @@ services:
     working_dir: "/tmp"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /c/Users/Public/docker-shared/downloads:/var/tmp/downloads/jenkins-2.204.5
-      - /c/Users/Public/docker-shared:/tmp/shared
+      - /c/Users/Public/docker-shared/downloads/jenkins-2.204.5:/var/tmp/downloads/jenkins-2.204.5
+      - /c/Users/Public/docker-shared/data-jenkins-plugins:/var/lib/jenkins_plugins
     ports:
       - "8083:8080"
     privileged: true
