@@ -9,7 +9,7 @@
 
 - name: Setup tomcat (Each instance)
   include_tasks: settings-instance.yml
-  tags: [ never, setup-instances ]
+  tags: [ never, instances ]
   with_items: "{{ tomcat_instances }}"
   loop_control:
     loop_var: application
