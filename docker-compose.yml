@@ -47,3 +47,16 @@ services:
       # - /c/Users/Public/docker-shared/data-mssql:/tmp/shared
     ports:
       - "1433:1433"
+
+  # https://hub.docker.com/r/sonatype/nexus3
+  # cat /nexus-data/admin.password
+  # http://localhost:8081/nexus3/
+  nexus:
+    image: sonatype/nexus3:3.21.1
+    container_name: nexus
+    volumes:
+      - /c/Users/Public/docker-shared/data-nexus3:/nexus-data
+    ports:
+      - "8081:8081"
+    environment:
+      - NEXUS_CONTEXT=nexus3
