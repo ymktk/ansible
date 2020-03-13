@@ -100,8 +100,8 @@ systemctl status jenkins2
 
 
 #   Setup tomcat (Each instance)
-ansible-playbook -i inventory playbook-build-tomcat-install.yml --tags "setup-instances" --list-tasks
-ansible-playbook -i inventory playbook-build-tomcat-install.yml --tags "setup-instances" -vv
+ansible-playbook -i inventory playbook-build-tomcat.yml --tags "setup-instances" --list-tasks
+ansible-playbook -i inventory playbook-build-tomcat.yml --tags "setup-instances" -vv
 
 
 
