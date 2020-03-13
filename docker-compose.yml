@@ -32,7 +32,6 @@ services:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /c/Users/Public/docker-shared/downloads:/var/tmp/downloads
     ports:
-      - "8090:8090"
       - "8091:8091"
       - "8092:8092"
     privileged: true
