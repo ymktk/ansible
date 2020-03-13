@@ -93,9 +93,16 @@ ansible-playbook -i inventory playbook-build-jenkins.yml --tags "plugins" -vv
 ansible-playbook -i inventory playbook-build-tomcat-install.yml --list-tasks
 ansible-playbook -i inventory playbook-build-tomcat-install.yml -vv
 
+# Start Jenkins
+docker exec -it jk bash
+systemctl start  jenkins2
+systemctl status jenkins2
+
+
 #   Setup tomcat (Each instance)
 ansible-playbook -i inventory playbook-build-tomcat-install.yml --tags "setup-instances" --list-tasks
 ansible-playbook -i inventory playbook-build-tomcat-install.yml --tags "setup-instances" -vv
+
 
 
 # 3-2. Target server
@@ -105,6 +112,11 @@ docker exec -it app bash
 ls -ltr /usr/lib/systemd/system/
 
 ```
+
+# Applications
+
+    - http://localhost:8083/jenkins/
+    - http://localhost:8081/artifactory/
 
 # Links
 
