@@ -84,6 +84,14 @@
     mode:  u+rwx
     follow: true
 
+- name: Ensure {{ jenkins_plug_dir }} exists
+  file:
+    path:  "{{ jenkins_plug_dir }}"
+    state: directory
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode:  0775
+
 - name: Ensure {{ jenkins_work_dir }} exists
   file:
     path:  "{{ jenkins_work_dir }}"
@@ -91,6 +99,12 @@
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
     mode:  0775
+
+- name: Ensure symlink {{ jenkins_home_dir }}/plugins to {{ jenkins_work_dir }} exists
+  file:
+    src:   "{{ jenkins_plug_dir }}"
+    dest:  "{{ jenkins_home_dir }}/plugins"
+    state: link
 
 - name: Ensure symlink {{ jenkins_home_dir }}/workspace to {{ jenkins_work_dir }} exists
   file:
