@@ -88,9 +88,9 @@
   file:
     path:  "{{ jenkins_plug_dir }}"
     state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  0775
+    # owner: "{{ jenkins_user }}"
+    # group: "{{ jenkins_group }}"
+    # mode:  0775
 
 - name: Ensure {{ jenkins_work_dir }} exists
   file:
