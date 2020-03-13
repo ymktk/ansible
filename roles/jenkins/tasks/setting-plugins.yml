@@ -2,16 +2,6 @@
   debug: msg="plugins"
 
 # https://docs.ansible.com/ansible/latest/modules/jenkins_plugin_module.html
-
-- name: Copy jpi files from Ansible control
-  copy:
-    src:   "{{ item }}"
-    dest:  "{{ jenkins_home_dir }}/plugins/"
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-  with_fileglob:
-    - "../../downloads/*.jpi"
-
 - name: Install plugins
   jenkins_plugin:
     name:         "{{ item }}"
