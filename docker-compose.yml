@@ -21,7 +21,7 @@ services:
       - /c/Users/Public/docker-shared/downloads:/var/tmp/downloads/jenkins-2.204.5
       - /c/Users/Public/docker-shared:/tmp/shared
     ports:
-      - "8082:8082"
+      - "8083:8080"
     privileged: true
 
   app:
@@ -48,15 +48,17 @@ services:
     ports:
       - "1433:1433"
 
-  # https://hub.docker.com/r/sonatype/nexus3
-  # cat /nexus-data/admin.password
-  # http://localhost:8081/nexus3/
-  nexus:
-    image: sonatype/nexus3:3.21.1
-    container_name: nexus
+  # http://localhost:8081/artifactory
+  # docker exec -it artifactory /bin/bash
+  artifactory:
+    image: docker.bintray.io/jfrog/artifactory-oss:7.2.1
+    container_name: artifactory
     volumes:
-      - /c/Users/Public/docker-shared/data-nexus3:/nexus-data
+      - artifactory6_data:/var/opt/jfrog/artifactory
     ports:
       - "8081:8081"
-    environment:
-      - NEXUS_CONTEXT=nexus3
+      - "8082:8082"
+
+volumes:
+  # Named volume
+  artifactory6_data:
