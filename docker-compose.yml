@@ -15,7 +15,7 @@ services:
   jenkins:
     image: ymktk/centos-systemd:jenkins
     container_name: jk
-    working_dir: "/var/lib/"
+    working_dir: "/var/lib"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /c/Users/Public/docker-shared/downloads/jenkins-2.204.5:/var/tmp/downloads/jenkins-2.204.5
@@ -27,7 +27,7 @@ services:
   app:
     image: ymktk/centos-systemd:tomcat-9.0
     container_name: app
-    working_dir: "/opt"
+    working_dir: "/var/lib/tomcats"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /c/Users/Public/docker-shared/downloads:/var/tmp/downloads
