@@ -60,7 +60,12 @@
   template:
     src: "instance-service.j2"
     dest: /usr/lib/systemd/system/tomcat-{{ tomcat_instances[application].instance_name }}.service
-  # notify: restart tomcat
+
+- name: systemd daemon_reload
+  tags: [ never, instances ]
+  systemd:
+    name: "tomcat-{{ tomcat_instances[application].instance_name }}"
+    daemon_reload: yes
 
 # - name: Enable tomcat service on startup
 #   systemd:
