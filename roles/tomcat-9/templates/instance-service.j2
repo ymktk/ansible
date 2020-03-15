@@ -12,6 +12,7 @@ Environment=CATALINA_HOME={{ tomcat_install_dir }}/{{ tomcat_symlink }}
 Environment=CATALINA_BASE={{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}
 Environment=CATALINA_PID={{ tomcat_instances_dir }}/{{ tomcat_instances[application].instance_name }}/catalina.pid
 Environment=CATALINA_OUT=/var/log/tomcats/{{ tomcat_instances[application].instance_name }}/catalina.out
+Environment=IAM={{ tomcat_instances[application].instance_name }}
 
 Environment='CATALINA_OPTS=-Xms{{ tomcat_instances[application].jvm_xms }}M -Xmx{{ tomcat_instances[application].jvm_xmx }}M -server -XX:+UseParallelGC'
 Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
