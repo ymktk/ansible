@@ -8,8 +8,8 @@
   debug: msg="-START-"
 
 - name: Setup Jenkins Master
-  import_tasks: setting-master.yml
+  import_tasks: settings.yml
 
 - name: Install Jenkins plugins
   tags: [ never, plugins ]
-  import_tasks: setting-plugins.yml
+  import_tasks: settings-plugins.yml
