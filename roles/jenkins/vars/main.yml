@@ -15,62 +15,68 @@ jenkins_plugin_names:
   - "trilead-api"
   - "jaxb"
   - "jdk-tool"
+  - "cloudbees-folder" # Folders
+  - "jackson2-api"
   - "structs"
+  - "display-url-api"
+  - "durable-task"
+  - "script-security"
+  - "command-launcher" # Command Agent Launcher
   - "scm-api"
   - "workflow-step-api" # Pipeline: Step API
-  - "workflow-api"      # Pipeline: API
-  - "display-url-api"
   - "mailer"
-  - "command-launcher" # Command Agent Launcher
-  - "script-security"
-  - "workflow-support"  # Pipeline: Supporting APIs
-  - "durable-task"
-  - "workflow-durable-task-step" # Pipeline: Nodes and Processes
-  - "apache-httpcomponents-client-4-api"
-  - "workflow-basic-steps" # Pipeline: Basic Steps
+  - "job-dsl"
   - "configuration-as-code"
-  - "credentials"
-  - "plain-credentials"
-  - "cloudbees-folder" # Folders
-  - "ssh-credentials"
-  - "jsch" # JSch dependency
-  - "git-client"
-  - "git-server"
-  - "workflow-scm-step" # Pipeline: SCM Step
-  - "variant"
-  - "jackson2-api"
-  - "metrics"
   - "bouncycastle-api"
-  - "async-http-client"
-  - "support-core"
-  - "ace-editor" # JavaScript GUI Lib: ACE Editor bundle
-  - "jquery-detached" # JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
-  - "workflow-cps" # Pipeline: Groovy
-  - "workflow-cps-global-lib" # Pipeline: Shared Groovy Libraries
-  - "workflow-job" # Pipeline: Job
+  - "javadoc"
+  - "apache-httpcomponents-client-4-api"
+  - "variant"
   - "branch-api"
-  - "workflow-multibranch" # Pipeline: Multibranch
-  - "credentials-binding"
-  - "pipeline-stage-step"
   - "pipeline-model-api"
-  - "pipeline-model-extensions" # Pipeline: Declarative Extension Points API
+  - "workflow-api"      # Pipeline: API
+  - "token-macro"
+  - "workflow-scm-step" # Pipeline: SCM Step
+  - "credentials"
+  - "async-http-client"
+  - "jquery-detached" # JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
+  - "ace-editor" # JavaScript GUI Lib: ACE Editor bundle
+  - "junit"
+  - "workflow-support"  # Pipeline: Supporting APIs
+  - "pipeline-stage-tags-metadata"
+  - "pipeline-stage-step"
+  - "run-condition"
+  - "plain-credentials"
+  - "ssh-credentials"
   - "authentication-tokens"
+  - "matrix-project"
+  - "workflow-durable-task-step" # Pipeline: Nodes and Processes
+  - "workflow-job" # Pipeline: Job
+  - "pipeline-input-step"
+  - "credentials-binding"
+  - "config-file-provider"
+  - "jsch" # JSch dependency
+  - "ansible"
+  - "rebuild"
+  - "metrics"
+  - "workflow-basic-steps" # Pipeline: Basic Steps
+  - "maven-plugin"
+  - "git-client"
+  - "ssh"
+  - "support-core"
+  - "conditional-buildstep"
+  - "git-server"
+  - "promoted-builds"
+  - "workflow-cps" # Pipeline: Groovy
+  - "parameterized-trigger"
+  - "git"
+  - "pipeline-model-extensions" # Pipeline: Declarative Extension Points API
+  - "workflow-multibranch" # Pipeline: Multibranch
   - "docker-commons"
   - "docker-workflow" # Docker Pipeline
-  - "pipeline-input-step"
   - "pipeline-model-declarative-agent" # Deprecated!!!
-  - "pipeline-stage-tags-metadata"
+  - "workflow-cps-global-lib" # Pipeline: Shared Groovy Libraries
   - "pipeline-model-definition" # Pipeline: Declarative
-  - "token-macro"
-  - "junit"
-  - "matrix-project"
-  - "run-condition"
-  - "javadoc"
-  - "maven-plugin"
-  - "conditional-buildstep"
-  - "parameterized-trigger"
-  - "promoted-builds"
-  - "git"
+
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats
