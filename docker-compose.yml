@@ -5,12 +5,11 @@ services:
     image: ansible_controller
     container_name: ansible
     working_dir: "/home/ansible"
-
     volumes:
       - /c/Users/Public/repos/ansible:/home/ansible/code
       - /c/Users/Public/docker-shared/downloads:/home/ansible/downloads
       - /c/Users/Public/docker-shared:/tmp/shared
-    tty: true # Can keep running
+    tty: true
 
   jenkins:
     image: ymktk/centos-systemd:jenkins
