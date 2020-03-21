@@ -27,6 +27,8 @@ jenkins_plugin_names:
   - "mailer"
   - "job-dsl"
   - "configuration-as-code"
+  - "matrix-auth"
+  - "role-strategy"
   - "bouncycastle-api"
   - "javadoc"
   - "apache-httpcomponents-client-4-api"
