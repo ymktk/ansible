@@ -15,62 +15,106 @@ jenkins_plugin_names:
   - "trilead-api"
   - "jaxb"
   - "jdk-tool"
+  - "cloudbees-folder" # Folders
+  - "jackson2-api"
   - "structs"
+  - "display-url-api"
+  - "durable-task"
+  - "script-security"
+  - "command-launcher" # Command Agent Launcher
   - "scm-api"
   - "workflow-step-api" # Pipeline: Step API
-  - "workflow-api"      # Pipeline: API
-  - "display-url-api"
   - "mailer"
-  - "command-launcher" # Command Agent Launcher
-  - "script-security"
-  - "workflow-support"  # Pipeline: Supporting APIs
-  - "durable-task"
-  - "workflow-durable-task-step" # Pipeline: Nodes and Processes
-  - "apache-httpcomponents-client-4-api"
-  - "workflow-basic-steps" # Pipeline: Basic Steps
+  - "job-dsl"
   - "configuration-as-code"
-  - "credentials"
-  - "plain-credentials"
-  - "cloudbees-folder" # Folders
-  - "ssh-credentials"
-  - "jsch" # JSch dependency
-  - "git-client"
-  - "git-server"
-  - "workflow-scm-step" # Pipeline: SCM Step
-  - "variant"
-  - "jackson2-api"
-  - "metrics"
+  - "matrix-auth"
+  - "role-strategy"
   - "bouncycastle-api"
-  - "async-http-client"
-  - "support-core"
-  - "ace-editor" # JavaScript GUI Lib: ACE Editor bundle
-  - "jquery-detached" # JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
-  - "workflow-cps" # Pipeline: Groovy
-  - "workflow-cps-global-lib" # Pipeline: Shared Groovy Libraries
-  - "workflow-job" # Pipeline: Job
+  - "javadoc"
+  - "apache-httpcomponents-client-4-api"
+  - "variant"
   - "branch-api"
-  - "workflow-multibranch" # Pipeline: Multibranch
-  - "credentials-binding"
-  - "pipeline-stage-step"
   - "pipeline-model-api"
-  - "pipeline-model-extensions" # Pipeline: Declarative Extension Points API
+  - "workflow-api"      # Pipeline: API
+  - "token-macro"
+  - "workflow-scm-step" # Pipeline: SCM Step
+  - "credentials"
+  - "async-http-client"
+  - "jquery-detached" # JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
+  - "ace-editor" # JavaScript GUI Lib: ACE Editor bundle
+  - "junit"
+  - "workflow-support"  # Pipeline: Supporting APIs
+  - "pipeline-stage-tags-metadata"
+  - "pipeline-stage-step"
+  - "run-condition"
+  - "plain-credentials"
+  - "ssh-credentials"
   - "authentication-tokens"
+  - "matrix-project"
+  - "workflow-durable-task-step" # Pipeline: Nodes and Processes
+  - "workflow-job" # Pipeline: Job
+  - "pipeline-input-step"
+  - "credentials-binding"
+  - "config-file-provider"
+  - "jsch" # JSch dependency
+  - "ansible"
+  - "rebuild"
+  - "metrics"
+  - "workflow-basic-steps" # Pipeline: Basic Steps
+  - "maven-plugin"
+  - "git-client"
+  - "ssh"
+  - "support-core"
+  - "conditional-buildstep"
+  - "git-server"
+  - "promoted-builds"
+  - "workflow-cps" # Pipeline: Groovy
+  - "parameterized-trigger"
+  - "git"
+  - "pipeline-model-extensions" # Pipeline: Declarative Extension Points API
+  - "workflow-multibranch" # Pipeline: Multibranch
   - "docker-commons"
   - "docker-workflow" # Docker Pipeline
-  - "pipeline-input-step"
   - "pipeline-model-declarative-agent" # Deprecated!!!
-  - "pipeline-stage-tags-metadata"
+  - "workflow-cps-global-lib" # Pipeline: Shared Groovy Libraries
   - "pipeline-model-definition" # Pipeline: Declarative
-  - "token-macro"
-  - "junit"
-  - "matrix-project"
-  - "run-condition"
-  - "javadoc"
-  - "maven-plugin"
-  - "conditional-buildstep"
-  - "parameterized-trigger"
-  - "promoted-builds"
-  - "git"
+  # Add for blueocean
+  - "jenkins-design-language" # Design Language
+  - "blueocean-core-js" # Blue Ocean Core JS
+  - "github-api" # GitHub API
+  - "github" # GitHub
+  - "github-branch-source" # GitHub Branch Source
+  - "pipeline-graph-analysis" # Pipeline Graph Analysis
+  - "pipeline-build-step" # Pipeline: Build Step
+  - "blueocean-commons" # Common API for Blue Ocean
+  - "blueocean-rest" # REST API for Blue Ocean
+  - "pubsub-light" # Pub-Sub "light" Bus
+  - "blueocean-pipeline-scm-api" # Pipeline SCM API for Blue Ocean
+  - "htmlpublisher" # HTML Publisher
+  - "blueocean-web" # Web for Blue Ocean
+  - "blueocean-jwt" # JWT for Blue Ocean
+  - "favorite" # Favorite
+  - "blueocean-rest-impl" # REST Implementation for Blue Ocean
+  - "blueocean-pipeline-api-impl" # Pipeline implementation for Blue Ocean
+  - "blueocean-github-pipeline" # GitHub Pipeline for Blue Ocean
+  - "blueocean-git-pipeline" # Git Pipeline for Blue Ocean
+  - "pipeline-milestone-step" # Pipeline: Milestone Step
+  - "blueocean-config" # Config API for Blue Ocean
+  - "mercurial" # Mercurial
+  - "handy-uri-templates-2-api" # Handy Uri Templates 2.x API
+  - "cloudbees-bitbucket-branch-source" # Bitbucket Branch Source
+  - "blueocean-bitbucket-pipeline" #Bitbucket Pipeline for Blue Ocean
+  - "blueocean-dashboard" # Dashboard for Blue Ocean
+  - "blueocean-personalization" #Personalization for Blue Ocean
+  - "jira" # Jira
+  - "blueocean-jira" # JIRA Integration for Blue Ocean
+  - "blueocean-display-url" # Display URL for Blue Ocean
+  - "sse-gateway" # Server Sent Events (SSE) Gateway
+  - "blueocean-events" # Events API for Blue Ocean
+  - "blueocean-pipeline-editor" # Blue Ocean Pipeline Editor
+  - "blueocean-i18n" # i18n for Blue Ocean
+  - "blueocean-autofavorite" # Autofavorite for Blue Ocean
+  - "blueocean" # Blue Ocean
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats

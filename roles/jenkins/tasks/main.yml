@@ -1,20 +1,15 @@
-- name: Download jenkins.war
-  import_tasks: download.yml
+- name: Pre requirements
+  import_tasks: requirements.yml
 
-- name: Ensure dependencies are installed.
-  package:
-    name:
-      - curl
-      - libselinux-python #need?
-      - initscripts #need?
-    state: installed
+- name: Transfer jenkins.war
+  import_tasks: transfer.yml
 
 - name: "start"
   debug: msg="-START-"
 
 - name: Setup Jenkins Master
-  import_tasks: setting-master.yml
+  import_tasks: settings.yml
 
 - name: Install Jenkins plugins
   tags: [ never, plugins ]
-  import_tasks: setting-plugins.yml
+  import_tasks: settings-plugins.yml

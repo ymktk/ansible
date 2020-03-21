@@ -1,13 +1,4 @@
 ---
-# Service user permission
-- name: usermod -aG tomcat {{ jenkins_user }}
-  user:
-    name: "{{ jenkins_user }}"
-    groups:
-      - "tomcat"
-    append: yes
-
-
 # Setup as a tomcat instance
 - name: Ensure /var/log/tomcats/{{ jenkins_instance_name }} exists
   file:

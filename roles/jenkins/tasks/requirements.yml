@@ -1,0 +1,35 @@
+- name: "groupadd {{ jenkins_group }}"
+  group:
+    name: "{{ jenkins_group }}"
+    gid:  "{{ jenkins_group_gid | default(omit) }}"
+    state: present
+
+- name: "useradd {{ jenkins_user }}"
+  user:
+    name:  "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    uid:   "{{ jenkins_user_uid | default(omit) }}"
+    state: present
+
+# Service user permission
+- name: usermod -aG tomcat {{ jenkins_user }}
+  user:
+    name: "{{ jenkins_user }}"
+    groups:
+      - "tomcat"
+    append: yes
+
+- name: Ensure dependencies are installed.
+  package:
+    name:
+      - curl
+      - libselinux-python
+      - initscripts
+      - git
+    state: installed
+
+- name: Stop and disable firewalld
+  service:
+    name:    firewalld
+    state:   stopped
+    enabled: no
