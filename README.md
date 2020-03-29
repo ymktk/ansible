@@ -136,13 +136,7 @@ systemctl start tomcat-i02.service
 - Tomcat
     - (zaxos/tomcat-ansible-role)[https://github.com/zaxos/tomcat-ansible-role]
     - (Tomcat の初期設定まとめ)[https://qiita.com/hidekatsu-izuno/items/ab604b6c764b5b5a86ed]
-- MS SQL server
-    - (docker hub Microsoft SQL Server)[https://hub.docker.com/_/microsoft-mssql-server]
-- Artifactory OSS
-    - https://www.jfrog.com/confluence/display/RTF5X/Installing+with+Docker
-    - (How do I login to Artifactory for the first time? What are the default admin username and password?)[https://www.jfrog.com/confluence/display/RT12/FAQs#FAQs-HowdoIlogintoArtifactoryforthefirsttime?Whatarethedefaultadminusernameandpassword?]
-
-
+s
 | | Ansible core | Ansible Management tool | Support |
 | ---- | ---- | ---- | ---- |
 | Community  | Ansible Project |  AWX  |  No  |
