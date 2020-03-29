@@ -7,6 +7,7 @@ services:
     working_dir: "/home/ansible"
     volumes:
       - /c/Users/Public/repos/ansible:/home/ansible/code
+      - /c/Users/Public/repos/jenkins:/home/ansible/jenkins
       - /c/Users/Public/docker-shared/downloads:/home/ansible/downloads
       - /c/Users/Public/docker-shared:/tmp/shared
     tty: true
@@ -34,27 +35,3 @@ services:
       - "8091:8091"
       - "8092:8092"
     privileged: true
-
-  db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    container_name: mssql
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=sa@Password
-    # volumes:
-      # - /c/Users/Public/docker-shared/data-mssql:/tmp/shared
-    ports:
-      - "1433:1433"
-
-  artifactory:
-    image: docker.bintray.io/jfrog/artifactory-oss:7.2.1
-    container_name: artifactory
-    volumes:
-      - artifactory6_data:/var/opt/jfrog/artifactory
-    ports:
-      - "8081:8081"
-      - "8082:8082"
-
-volumes:
-  # Named volume
-  artifactory6_data:
