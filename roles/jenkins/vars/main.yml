@@ -10,7 +10,6 @@ jenkins_download_dir: /var/tmp/downloads
 jenkins_home_dir:     /var/lib/jenkins_home
 jenkins_plug_dir:     /var/lib/jenkins_plugins
 jenkins_work_dir:     /var/lib/jenkins_workspace
-jenkins_vars_dir:     /var/lib/jenkins_vars
 
 jenkins_plugin_names:
   - "trilead-api"

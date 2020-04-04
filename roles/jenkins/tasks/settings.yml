@@ -91,14 +91,6 @@
     group: "{{ jenkins_group }}"
     mode:  0775
 
-- name: Ensure {{ jenkins_vars_dir }} exists
-  file:
-    path:  "{{ jenkins_vars_dir }}"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  0775
-
 - name: Ensure symlink {{ jenkins_home_dir }}/plugins to {{ jenkins_work_dir }} exists
   file:
     src:   "{{ jenkins_plug_dir }}"
