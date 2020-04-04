@@ -115,6 +115,8 @@ jenkins_plugin_names:
   - "blueocean-i18n" # i18n for Blue Ocean
   - "blueocean-autofavorite" # Autofavorite for Blue Ocean
   - "blueocean" # Blue Ocean
+  - "envinject-api" # EnvInject API
+  - "envinject"     # Environment Injector
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats
