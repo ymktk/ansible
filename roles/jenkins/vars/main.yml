@@ -117,6 +117,7 @@ jenkins_plugin_names:
   - "blueocean" # Blue Ocean
   - "envinject-api" # EnvInject API
   - "envinject"     # Environment Injector
+  # - "pipeline-utility-steps" # Pipeline Utility Steps, https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/
 
 tomcat_catalina_dir:   /opt/tomcat
 tomcat_instances_dir:  /var/lib/tomcats
