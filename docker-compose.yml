@@ -13,7 +13,7 @@ services:
     tty: true
 
   jenkins:
-    image: ymktk/centos-systemd:jenkins
+    image: centos/systemd
     container_name: jk
     working_dir: "/var/lib"
     volumes:
