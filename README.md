@@ -1,50 +1,6 @@
-# 2. Add a public key into a target server
-
-```bash
-# 2-1. Start the target server
-docker run -d --name target centos-systemd_server
-
-# 2-2. Extract the public key from the ansible controller
-export TMPDIR=/c/Users/Public/docker-shared
-docker run -it --rm ansible_controller cat /home/ansible/.ssh/id_rsa.pub >> $TMPDIR/tmp-id_rsa.pub
-
-# 2-3. Add the public key into the target server and create modified image
-docker container cp $TMPDIR/tmp-id_rsa.pub target:/root/.ssh/authorized_keys
-docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/jenkins/.ssh/authorized_keys
-docker container cp $TMPDIR/tmp-id_rsa.pub target:/home/tomcat/.ssh/authorized_keys
-
-docker exec -it -u root target bash
-
-chown root:root /root/.ssh/authorized_keys
-chmod 600       /root/.ssh/authorized_keys
-
-chown jenkins:jenkins /home/jenkins/.ssh/authorized_keys
-chmod 600             /home/jenkins/.ssh/authorized_keys
-
-chown tomcat:tomcat /home/tomcat/.ssh/authorized_keys
-chmod 600           /home/tomcat/.ssh/authorized_keys
-
-ls -ld /root/.ssh  /home/jenkins/.ssh  /home/tomcat/.ssh
-ls -l  /root/.ssh/ /home/jenkins/.ssh/ /home/tomcat/.ssh/
-
-exit
-
-docker container stop target
-docker commit target centos-systemd_server
-docker container rm   target
-```
-
 # 3. How to start test servers
 
 ```bash
-## Ansible play
-cd ~/code/roles/
-
-# Ping test
-ansible -i inventory cicd_servers -m ping -u root -vvv
-
-
-
 # Jenkins
 #   Install Master wo plugins
 ansible-playbook -i inventory playbook-build-jenkins.yml --list-tasks
@@ -102,7 +58,7 @@ systemctl start tomcat-i02.service
 - Tomcat
     - (zaxos/tomcat-ansible-role)[https://github.com/zaxos/tomcat-ansible-role]
     - (Tomcat の初期設定まとめ)[https://qiita.com/hidekatsu-izuno/items/ab604b6c764b5b5a86ed]
-s
+
 | | Ansible core | Ansible Management tool | Support |
 | ---- | ---- | ---- | ---- |
 | Community  | Ansible Project |  AWX  |  No  |
