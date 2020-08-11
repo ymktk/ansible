@@ -1,19 +1,3 @@
-# 1. How to get necessary Docker image
-
-```bash
-git clone https://github.com/ymktk/docker-k8s.git
-
-# 1-1. Create the ansible controller image
-cd /path/to/docker-k8s/ansible/
-docker-compose build
-# -> ansible_controller is created
-
-# 1-2. Create the target server image
-cd /path/to/docker-k8s/centos-systemd/
-docker-compose build
-# -> centos-systemd_server is created
-```
-
 # 2. Add a public key into a target server
 
 ```bash
@@ -53,24 +37,6 @@ docker container rm   target
 # 3. How to start test servers
 
 ```bash
-cd /path/to/ansible/
-
-docker-compose up -d
-
-# 3-1. Ansible controller
-docker exec -it con sh
-ansible --version
-python3 -V
-pip3 -V
-
-## ssh test
-ssh root@jk
-exit
-
-ssh jenkins@jk
-sudo -l
-exit
-
 ## Ansible play
 cd ~/code/roles/
 
