@@ -1,6 +1,6 @@
 ---
 # tomcat_version: 8.5.51
-tomcat_version: 9.0.31
+tomcat_version: 9.0.37
 tomcat_java_home: /usr/lib/jvm/java-11-openjdk
 
 tomcat_instances:
