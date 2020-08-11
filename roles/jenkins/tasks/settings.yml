@@ -21,6 +21,7 @@
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
   with_items:
+    - "bin"
     - "conf"
     - "temp"
     - "webapps"
@@ -42,6 +43,14 @@
     dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/webapps/"
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
+
+- name: Copy {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh
+  template:
+    src:  "instance.sh.j2"
+    dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh"
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode: "0755"
 
 - name: Update {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties
   template:
