@@ -2,9 +2,9 @@
 # roleで利用される変数のデフォルト値を定義
 # varsとの違いは、group_varsなどで変数を上書きできる
 
-# http://mirrors.jenkins.io/war-stable/2.204.5/
-jenkins_version:    "2.204.5"
-jenkins_war_sha256: "94c73fa5b72e0a4eb52c5c99c08351f85a51d138f3dbaff6f64e4406353f839c"
+# http://mirrors.jenkins.io/war-stable/2.235.3/
+jenkins_version:    "2.235.3"
+jenkins_war_sha256: "e88642a2b52fc26ffa4425a0aba65163f083d770e5ef7182b2e32de41ff33981"
 
 jenkins_instance_name: jenkins2
 jenkins_http_port:     8080
@@ -22,5 +22,5 @@ jenkins_proxy_noproxy:
 # To install plugins
 jenkins_hostname: localhost
 jenkins_admin_username: admin
-jenkins_admin_password: jkadmin
+jenkins_admin_password: admin
 jenkins_timeout: 60

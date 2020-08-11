@@ -14,5 +14,5 @@ galaxy_info:
     - development
 
 dependencies:
-  - java
-  - tomcat-9
+  # - java
+  # - tomcat-9

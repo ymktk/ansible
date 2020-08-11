@@ -53,15 +53,15 @@
     src:  "instance-server-9.0.xml.j2"
     dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml"
 
-- name: Update /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
-  template:
-    src: "instance-service.j2"
-    dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
+# - name: Update /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
+#   template:
+#     src: "instance-service.j2"
+#     dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
 
-- name: systemd daemon_reload
-  systemd:
-    name: "{{ jenkins_instance_name }}"
-    daemon_reload: yes
+# - name: systemd daemon_reload
+#   systemd:
+#     name: "{{ jenkins_instance_name }}"
+#     daemon_reload: yes
 
 
 # Setup jenkins_home
@@ -103,13 +103,13 @@
     dest:  "{{ jenkins_home_dir }}/workspace"
     state: link
 
-- name: Ensure custom init scripts directory exists
-  file:
-    path:  "{{ jenkins_home_dir }}/init.groovy.d"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  0775
+# - name: Ensure custom init scripts directory exists
+#   file:
+#     path:  "{{ jenkins_home_dir }}/init.groovy.d"
+#     state: directory
+#     owner: "{{ jenkins_user }}"
+#     group: "{{ jenkins_group }}"
+#     mode:  0775
 
 - name: Configure proxy config for Jenkins
   template:
