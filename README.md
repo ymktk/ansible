@@ -1,32 +1,6 @@
 # 3. How to start test servers
 
 ```bash
-# Jenkins
-#   Install Master wo plugins
-ansible-playbook -i inventory playbook-build-jenkins.yml --list-tasks
-ansible-playbook -i inventory playbook-build-jenkins.yml -vv
-
-#   Install Jenkins plugins
-ansible-playbook -i inventory playbook-build-jenkins.yml --tags "plugins" --list-tasks
-ansible-playbook -i inventory playbook-build-jenkins.yml --tags "plugins" -vv
-
-# tomcat 9
-#   Unarchive tomcat.tar.gz + Setup tomcat (common)
-ansible-playbook -i inventory playbook-build-tomcat-install.yml --list-tasks
-ansible-playbook -i inventory playbook-build-tomcat-install.yml -vv
-
-# Start Jenkins
-docker exec -it jk bash
-systemctl start  jenkins2
-systemctl status jenkins2
-
-
-#   Setup tomcat (Each instance)
-ansible-playbook -i inventory playbook-build-tomcat.yml --tags "instances" --list-tasks
-ansible-playbook -i inventory playbook-build-tomcat.yml --tags "instances" -vv
-
-
-
 # 3-2. Target server
 docker exec -it app bash
 
