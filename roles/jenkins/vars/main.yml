@@ -1,15 +1,16 @@
 ---
 # roleで利用される変数を定義
 # 基本的に環境毎に変わる固定値などを記述し、group_varsなどで変数を上書しない
+pv_root_dir: /app
 
 jenkins_user:  jenkins
 jenkins_group: jenkins
 
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
-jenkins_download_dir: /var/tmp/downloads
-jenkins_home_dir:     /var/lib/jenkins_home
-jenkins_plug_dir:     /var/lib/jenkins_plugins
-jenkins_work_dir:     /var/lib/jenkins_workspace
+jenkins_download_dir: "{{ pv_root_dir }}/var/tmp/downloads"
+jenkins_home_dir:     "{{ pv_root_dir }}/var/lib/jenkins_home"
+jenkins_plug_dir:     "{{ pv_root_dir }}/var/lib/jenkins_plugins"
+jenkins_work_dir:     "{{ pv_root_dir }}/var/lib/jenkins_workspace"
 
 jenkins_plugin_names:
   - "trilead-api"
@@ -119,8 +120,9 @@ jenkins_plugin_names:
   - "envinject"     # Environment Injector
   # - "pipeline-utility-steps" # Pipeline Utility Steps, https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/
 
-tomcat_catalina_dir:   /opt/tomcat
-tomcat_instances_dir:  /var/lib/tomcats
+tomcat_catalina_dir:     "{{ pv_root_dir }}/opt/tomcat"
+tomcat_catalina_log_dir: "{{ pv_root_dir }}/var/log/tomcats"
+tomcat_instances_dir:    "{{ pv_root_dir }}/var/lib/tomcats"
 tomcat_java_home:      /usr/lib/jvm/java-11-openjdk
 tomcat_listen_address: 0.0.0.0
 

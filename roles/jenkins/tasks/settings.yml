@@ -1,20 +1,20 @@
 ---
 # Setup as a tomcat instance
-- name: Ensure /var/log/tomcats/{{ jenkins_instance_name }} exists
+- name: "Ensure {{ tomcat_catalina_log_dir }}/{{ jenkins_instance_name }} exists"
   file:
-    path:  /var/log/tomcats/{{ jenkins_instance_name }}
+    path:  "{{ tomcat_catalina_log_dir }}/{{ jenkins_instance_name }}"
     state: directory
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
 
-- name: Ensure instance directory({{ tomcat_instances_dir }}/{{ jenkins_instance_name }}) exists
+- name: "Ensure instance directory, {{ tomcat_instances_dir }}/{{ jenkins_instance_name }} exists"
   file:
     path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}"
     state: directory
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
 
-- name: Ensure necessary dirs in {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}
+- name: "Ensure necessary dirs in {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}"
   file:
     path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/{{ item }}"
     state: directory
@@ -46,11 +46,11 @@
 
 - name: Copy {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh
   template:
-    src:  "instance.sh.j2"
-    dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh"
+    src:   "instance.sh.j2"
+    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh"
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
-    mode: "0755"
+    mode:  "0755"
 
 - name: Update {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties
   template:
@@ -66,15 +66,12 @@
 #   template:
 #     src: "instance-service.j2"
 #     dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
-
 # - name: systemd daemon_reload
 #   systemd:
 #     name: "{{ jenkins_instance_name }}"
 #     daemon_reload: yes
 
-
 # Setup jenkins_home
-
 - name: Ensure jenkins_home {{ jenkins_home_dir }} exists
   file:
     path:  "{{ jenkins_home_dir }}"
@@ -88,9 +85,9 @@
   file:
     path:  "{{ jenkins_plug_dir }}"
     state: directory
-    # owner: "{{ jenkins_user }}"
-    # group: "{{ jenkins_group }}"
-    # mode:  0775
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+    mode:  0775
 
 - name: Ensure {{ jenkins_work_dir }} exists
   file:
@@ -131,6 +128,15 @@
   when:
     - jenkins_proxy_host | length > 0
     - jenkins_proxy_port | length > 0
+
+
+- name: "Ensure {{ jenkins_user }} user permission under {{ pv_root_dir }}"
+  file:
+    path:  "{{ pv_root_dir }}"
+    state: directory
+    recurse: yes
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
 
 # - name: Disable Setup wizard
 #   copy:

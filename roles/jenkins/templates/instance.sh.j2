@@ -7,7 +7,7 @@ export CATALINA_HOME={{ tomcat_catalina_dir }}
 
 export CATALINA_BASE={{ tomcat_instances_dir }}/{{ jenkins_instance_name }}
 export CATALINA_PID={{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/catalina.pid
-export CATALINA_OUT=/var/log/tomcats/{{ jenkins_instance_name }}/catalina.out
+export CATALINA_OUT={{ tomcat_catalina_log_dir }}/{{ jenkins_instance_name }}/catalina.out
 
 export JENKINS_HOME={{ jenkins_home_dir }}
 export JENKINS_PORT={{ jenkins_http_port }}
