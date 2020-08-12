@@ -1,5 +1,6 @@
 ---
-tomcat_install_dir: /opt
+pv_root_dir: /app
+tomcat_install_dir: "{{ pv_root_dir }}/opt"
 tomcat_symlink: tomcat
 tomcat_user:    tomcat
 tomcat_group:   tomcat
@@ -10,8 +11,8 @@ template_server_xml:  "instance-server-{{ '.'.join(tomcat_version.split('.')[:2]
 tomcat_listen_address: 0.0.0.0
 
 tomcat_download_URL:  https://archive.apache.org/dist
-tomcat_download_dir:  /var/tmp/downloads
-tomcat_instances_dir: /var/lib/tomcats
+tomcat_download_dir:  "{{ pv_root_dir }}/var/tmp/downloads"
+tomcat_instances_dir: "{{ pv_root_dir }}/var/lib/tomcats"
 
 tomcat_unnecessary_default_apps:
   # - ROOT

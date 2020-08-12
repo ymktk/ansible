@@ -1,3 +1,4 @@
+---
 - name: "Create group {{ tomcat_group }}"
   group:
     name: "{{ tomcat_group }}"
@@ -11,10 +12,19 @@
     uid:   "{{ tomcat_user_uid | default(omit) }}"
     state: present
 
-- name: "mkdir {{ tomcat_download_dir }}"
+- name: "Ensure {{ tomcat_install_dir }} exists"
+  file:
+    path:  "{{ tomcat_install_dir }}"
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+
+- name: "Ensure {{ tomcat_download_dir }} exists"
   file:
     path:  "{{ tomcat_download_dir }}"
     state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
 
 - name: Check if tomcat is already unarchived ("{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}")
   stat:
