@@ -41,3 +41,14 @@ Author Information
 ------------------
 
 This role was created in 2020 by [Takahiro Yamaki](https://github.com/ymktk/).
+
+
+```bash
+ls -ltr /usr/lib/systemd/system/
+
+systemctl start tomcat-i01.service
+systemctl start tomcat-i02.service
+```
+
+- tomcat instance1 http://localhost:8091/
+- tomcat instance2 http://localhost:8092/
