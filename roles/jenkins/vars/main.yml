@@ -13,23 +13,24 @@ jenkins_plug_dir:     "{{ pv_root_dir }}/var/lib/jenkins_plugins"
 jenkins_work_dir:     "{{ pv_root_dir }}/var/lib/jenkins_workspace"
 
 jenkins_plugin_names:
+  - "ansicolor"
+  - "snakeyamk-api"
+  - "configuration-as-code"
   - "trilead-api"
   - "jaxb"
   - "jdk-tool"
-  - "cloudbees-folder" # Folders
+  - "cloudbees-folder"
   - "jackson2-api"
   - "structs"
   - "display-url-api"
   - "durable-task"
   - "script-security"
-  - "command-launcher" # Command Agent Launcher
+  - "command-launcher"
   - "scm-api"
   - "workflow-step-api" # Pipeline: Step API
+  - "ant"
   - "mailer"
   - "job-dsl"
-  - "configuration-as-code"
-  - "matrix-auth"
-  - "role-strategy"
   - "bouncycastle-api"
   - "javadoc"
   - "apache-httpcomponents-client-4-api"
@@ -40,9 +41,12 @@ jenkins_plugin_names:
   - "token-macro"
   - "workflow-scm-step" # Pipeline: SCM Step
   - "credentials"
+  - "matrix-auth"
   - "async-http-client"
   - "jquery-detached" # JavaScript GUI Lib: jQuery bundles (jQuery and jQuery UI)
   - "ace-editor" # JavaScript GUI Lib: ACE Editor bundle
+  - "momentjs"
+  - "handlebars"
   - "junit"
   - "workflow-support"  # Pipeline: Supporting APIs
   - "pipeline-stage-tags-metadata"
@@ -51,7 +55,9 @@ jenkins_plugin_names:
   - "plain-credentials"
   - "ssh-credentials"
   - "authentication-tokens"
+  - "role-strategy"
   - "matrix-project"
+  - "test-result-analyzer"
   - "workflow-durable-task-step" # Pipeline: Nodes and Processes
   - "workflow-job" # Pipeline: Job
   - "pipeline-input-step"
@@ -59,25 +65,35 @@ jenkins_plugin_names:
   - "config-file-provider"
   - "jsch" # JSch dependency
   - "ansible"
+  - "ssh-agent"
   - "rebuild"
+  - "dashboard-view"
   - "metrics"
   - "workflow-basic-steps" # Pipeline: Basic Steps
+  - 'ivy'
   - "maven-plugin"
   - "git-client"
   - "ssh"
+  - "project-inheritance"
   - "support-core"
   - "conditional-buildstep"
   - "git-server"
   - "promoted-builds"
   - "workflow-cps" # Pipeline: Groovy
   - "parameterized-trigger"
+  - "pipeline-utility-steps" # Pipeline Utility Steps, https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/
   - "git"
   - "pipeline-model-extensions" # Pipeline: Declarative Extension Points API
   - "workflow-multibranch" # Pipeline: Multibranch
-  - "docker-commons"
-  - "docker-workflow" # Docker Pipeline
-  - "pipeline-model-declarative-agent" # Deprecated!!!
+  - "pipeline-graph-analysis"
+  - "gradle"
   - "workflow-cps-global-lib" # Pipeline: Shared Groovy Libraries
+  - "docker-commons"
+  - "pipeline-model-declarative-agent" # Deprecated!!!
+  - "pipeline-rest-api"
+  - "Artifactory"
+  - "docker-workflow" # Docker Pipeline
+  - "pipeline-stage-view"
   - "pipeline-model-definition" # Pipeline: Declarative
   # Add for blueocean
   - "jenkins-design-language" # Design Language
@@ -85,7 +101,6 @@ jenkins_plugin_names:
   - "github-api" # GitHub API
   - "github" # GitHub
   - "github-branch-source" # GitHub Branch Source
-  - "pipeline-graph-analysis" # Pipeline Graph Analysis
   - "pipeline-build-step" # Pipeline: Build Step
   - "blueocean-commons" # Common API for Blue Ocean
   - "blueocean-rest" # REST API for Blue Ocean
@@ -118,7 +133,6 @@ jenkins_plugin_names:
   - "blueocean" # Blue Ocean
   - "envinject-api" # EnvInject API
   - "envinject"     # Environment Injector
-  - "pipeline-utility-steps" # Pipeline Utility Steps, https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/
 
 tomcat_catalina_dir:     "{{ pv_root_dir }}/opt/tomcat"
 tomcat_catalina_log_dir: "{{ pv_root_dir }}/var/log/tomcats"
