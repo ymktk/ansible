@@ -130,9 +130,9 @@
     - jenkins_proxy_port | length > 0
 
 
-- name: "Ensure {{ jenkins_user }} user permission under {{ pv_root_dir }}"
+- name: "Ensure {{ jenkins_user }} user permission under {{ pv_root_dir }}/var"
   file:
-    path:  "{{ pv_root_dir }}"
+    path:  "{{ pv_root_dir }}/var"
     state: directory
     recurse: yes
     owner: "{{ jenkins_user }}"
