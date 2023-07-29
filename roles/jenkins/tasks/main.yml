@@ -1,15 +1,15 @@
 - name: Pre requirements
   import_tasks: requirements.yml
 
-- name: Transfer jenkins.war
-  import_tasks: transfer.yml
+# - name: Transfer jenkins.war
+#   import_tasks: transfer.yml
 
-- name: "start"
-  debug: msg="-START-"
+# - name: "start"
+#   debug: msg="-START-"
 
-- name: Setup Jenkins Master
-  import_tasks: settings.yml
+# - name: Setup Jenkins Master
+#   import_tasks: settings.yml
 
-- name: Install Jenkins plugins
-  tags: [ never, plugins ]
-  import_tasks: settings-plugins.yml
+# - name: Install Jenkins plugins
+#   tags: [ never, plugins ]
+#   import_tasks: settings-plugins.yml

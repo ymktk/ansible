@@ -12,20 +12,20 @@
     state: present
 
 # Service user permission
-- name: usermod -aG tomcat {{ jenkins_user }}
+- name: usermod -aG docker {{ jenkins_user }}
   user:
     name: "{{ jenkins_user }}"
     groups:
-      - "tomcat"
+      - "docker"
     append: yes
 
 - name: Ensure dependencies are installed.
   package:
     name:
       - curl
-      - libselinux-python
-      - initscripts
       - git
+      # - libselinux-python
+      # - initscripts
     state: installed
 
 # - name: Stop and disable firewalld
