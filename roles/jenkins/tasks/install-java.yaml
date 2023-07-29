@@ -1,0 +1,21 @@
+---
+- name: "Ensure necessary dirs"
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+  with_items:
+    - "{{ app_opt_dir }}"
+
+- name: "Unarchive jre archive"
+  ansible.builtin.unarchive:
+    src:  "./files/{{ jre_archive_name }}"
+    dest:    "{{ app_opt_dir }}"
+    creates: "{{ app_opt_dir }}/{{ jre_unarchived_dir }}"
+
+- name: "symlink"
+  file:
+    src:  "{{ app_opt_dir }}/{{ jre_unarchived_dir }}"
+    dest: "{{ app_opt_dir }}/java"
+    state: link

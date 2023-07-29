@@ -1,5 +1,8 @@
 - name: Pre requirements
-  import_tasks: requirements.yml
+  import_tasks: requirements.yaml
+
+- name: Install Java
+  import_tasks: install-java.yaml
 
 # - name: Transfer jenkins.war
 #   import_tasks: transfer.yml

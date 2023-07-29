@@ -1,16 +1,18 @@
 ---
 # roleで利用される変数を定義
 # 基本的に環境毎に変わる固定値などを記述し、group_varsなどで変数を上書しない
-pv_root_dir: /app
+app_mount_point: /app
+app_opt_dir: "{{ app_mount_point }}/opt"
+app_var_dir: "{{ app_mount_point }}/var"
 
 jenkins_user:  jenkins
 jenkins_group: jenkins
 
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
-jenkins_download_dir: "{{ pv_root_dir }}/var/tmp/downloads"
-jenkins_home_dir:     "{{ pv_root_dir }}/var/lib/jenkins_home"
-jenkins_plug_dir:     "{{ pv_root_dir }}/var/lib/jenkins_plugins"
-jenkins_work_dir:     "{{ pv_root_dir }}/var/lib/jenkins_workspace"
+jenkins_download_dir: "{{ app_mount_point }}/var/tmp/downloads"
+jenkins_home_dir:     "{{ app_mount_point }}/var/lib/jenkins_home"
+jenkins_plug_dir:     "{{ app_mount_point }}/var/lib/jenkins_plugins"
+jenkins_work_dir:     "{{ app_mount_point }}/var/lib/jenkins_workspace"
 
 jenkins_plugin_names:
   - "ansicolor"
@@ -134,16 +136,6 @@ jenkins_plugin_names:
   - "envinject-api" # EnvInject API
   - "envinject"     # Environment Injector
 
-tomcat_catalina_dir:     "{{ pv_root_dir }}/opt/tomcat"
-tomcat_catalina_log_dir: "{{ pv_root_dir }}/var/log/tomcats"
-tomcat_instances_dir:    "{{ pv_root_dir }}/var/lib/tomcats"
-tomcat_java_home:      /usr/lib/jvm/java-11-openjdk
-tomcat_listen_address: 0.0.0.0
 
-tomcat_necessary_default_conf_files:
-  - catalina.policy
-  - catalina.properties
-  - context.xml
-  - jaspic-providers.xml
-  - jaspic-providers.xsd
-  - web.xml
+jre_archive_name: OpenJDK11U-jre_x64_linux_hotspot_{{ jre_version }}.tar.gz
+jre_unarchived_dir: jdk-{{ untar_name }}-jre

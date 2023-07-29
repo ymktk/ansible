@@ -24,3 +24,8 @@ jenkins_hostname: localhost
 jenkins_admin_username: admin
 jenkins_admin_password: admin
 jenkins_timeout: 60
+
+
+# Java
+jre_version: 11.0.20_8
+untar_name:  11.0.20+8

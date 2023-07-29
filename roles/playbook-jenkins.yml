@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  remote_user: taka
+  remote_user: jenkins
   gather_facts: false
   roles:
     - jenkins

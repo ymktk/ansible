@@ -1,3 +1,4 @@
+---
 - name: "groupadd {{ jenkins_group }}"
   group:
     name: "{{ jenkins_group }}"
@@ -27,6 +28,15 @@
       # - libselinux-python
       # - initscripts
     state: present
+
+- name: "Ensure necessary dirs"
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: "{{ jenkins_user }}"
+    group: "{{ jenkins_group }}"
+  with_items:
+    - "{{ app_mount_point }}"
 
 # - name: Stop and disable firewalld
 #   service:
