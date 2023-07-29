@@ -7,9 +7,6 @@ jenkins_war_sha256: "8a6ae7367755b3f31a050faa945f7a3991abdb43d941c7294cac890c1e2
 jre_version: 11.0.20_8
 untar_name:  11.0.20+8
 
-jenkins_instance_name: jenkins2
-jenkins_http_port:     8080
-jenkins_port_shutdown: 8180
 # jenkins_jvm_xms: 300
 # jenkins_jvm_xmx: 300
 
