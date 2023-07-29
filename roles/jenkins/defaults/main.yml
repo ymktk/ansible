@@ -1,16 +1,17 @@
 ---
-# roleで利用される変数のデフォルト値を定義
-# varsとの違いは、group_varsなどで変数を上書きできる
+# http://mirrors.jenkins.io/war-stable/2.303.3/
+jenkins_version:    "2.303.3"
+jenkins_war_sha256: "8a6ae7367755b3f31a050faa945f7a3991abdb43d941c7294cac890c1e2779d8"
 
-# http://mirrors.jenkins.io/war-stable/2.235.3/
-jenkins_version:    "2.235.4"
-jenkins_war_sha256: "e5688a8f07cc3d79ba3afa3cab367d083dd90daab77cebd461ba8e83a1e3c177"
+# Java
+jre_version: 11.0.20_8
+untar_name:  11.0.20+8
 
 jenkins_instance_name: jenkins2
 jenkins_http_port:     8080
 jenkins_port_shutdown: 8180
-jenkins_jvm_xms: 300
-jenkins_jvm_xmx: 300
+# jenkins_jvm_xms: 300
+# jenkins_jvm_xmx: 300
 
 # If Jenkins is behind a proxy
 jenkins_proxy_host: ""
@@ -24,8 +25,3 @@ jenkins_hostname: localhost
 jenkins_admin_username: admin
 jenkins_admin_password: admin
 jenkins_timeout: 60
-
-
-# Java
-jre_version: 11.0.20_8
-untar_name:  11.0.20+8

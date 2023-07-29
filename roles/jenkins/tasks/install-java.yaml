@@ -17,5 +17,5 @@
 - name: "symlink"
   file:
     src:  "{{ app_opt_dir }}/{{ jre_unarchived_dir }}"
-    dest: "{{ app_opt_dir }}/java"
+    dest: "{{ java_home }}"
     state: link

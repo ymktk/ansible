@@ -1,116 +1,35 @@
 ---
-- name: "mkdir {{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}"
+- name: "Ensure necessary dirs"
   file:
-    path:  "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}"
-    state: directory
-
-- name: "Download jenkins.war ver.{{ jenkins_version }}"
-  get_url:
-    url:       "{{ jenkins_download_URL }}/{{ jenkins_version }}/jenkins.war"
-    dest:      "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}/jenkins.war"
-    sha256sum: "{{ jenkins_war_sha256 }}"
-    timeout: 120
-
-
-# Setup as a tomcat instance
-- name: "Ensure {{ tomcat_catalina_log_dir }}/{{ jenkins_instance_name }} exists"
-  file:
-    path:  "{{ tomcat_catalina_log_dir }}/{{ jenkins_instance_name }}"
+    path:  "{{ item }}"
     state: directory
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
-
-- name: "Ensure instance directory, {{ tomcat_instances_dir }}/{{ jenkins_instance_name }} exists"
-  file:
-    path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-
-- name: "Ensure necessary dirs in {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}"
-  file:
-    path:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/{{ item }}"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
+    mode: 0755
+    # follow: true
   with_items:
-    - "bin"
-    - "conf"
-    - "temp"
-    - "webapps"
-    - "work"
+    - "{{ jenkins_download_dir }}"
+    - "{{ jenkins_apps_dir }}"
+    - "{{ jenkins_home_dir }}"
+    - "{{ jenkins_plug_dir }}"
+    - "{{ jenkins_work_dir }}"
+    - "{{ jenkins_war_dir }}"
+    - "{{ tools_dir }}"
 
-- name: Copy default conf files from {{ tomcat_catalina_dir }}/conf to {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/
+- name: "Ensure jenkins.war {{ jenkins_version }} is copied from ansible controller"
+  copy:
+    src:  "./files/{{ jenkins_version }}/jenkins.war"
+    dest: "{{ jenkins_download_dir }}"
+
+- name: Copy jenkins.war from {{ jenkins_download_dir }} to {{ jenkins_apps_dir }}
   copy:
     remote_src: yes
-    src:   "{{ tomcat_catalina_dir }}/conf/{{ item }}"
-    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/"
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-  with_items: "{{ tomcat_necessary_default_conf_files }}"
-
-- name: Copy jenkins.war from {{ jenkins_download_dir }}/jenkins-{{ jenkins_version }} to {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/webapps/
-  copy:
-    remote_src: yes
-    src:   "{{ jenkins_download_dir }}/jenkins-{{ jenkins_version }}/jenkins.war"
-    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/webapps/"
+    src:   "{{ jenkins_download_dir }}/jenkins.war"
+    dest:  "{{ jenkins_apps_dir }}"
     owner: "{{ jenkins_user }}"
     group: "{{ jenkins_group }}"
 
-- name: Copy {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh
-  template:
-    src:   "instance.sh.j2"
-    dest:  "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/bin/instance.sh"
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  "0755"
-
-- name: Update {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties
-  template:
-    src:  "logging-properties.j2"
-    dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/logging.properties"
-
-- name: Update {{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml
-  template:
-    src:  "instance-server-9.0.xml.j2"
-    dest: "{{ tomcat_instances_dir }}/{{ jenkins_instance_name }}/conf/server.xml"
-
-# - name: Update /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
-#   template:
-#     src: "instance-service.j2"
-#     dest: /usr/lib/systemd/system/{{ jenkins_instance_name }}.service
-# - name: systemd daemon_reload
-#   systemd:
-#     name: "{{ jenkins_instance_name }}"
-#     daemon_reload: yes
-
-# Setup jenkins_home
-- name: Ensure jenkins_home {{ jenkins_home_dir }} exists
-  file:
-    path:  "{{ jenkins_home_dir }}"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  u+rwx
-    follow: true
-
-- name: Ensure {{ jenkins_plug_dir }} exists
-  file:
-    path:  "{{ jenkins_plug_dir }}"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  0775
-
-- name: Ensure {{ jenkins_work_dir }} exists
-  file:
-    path:  "{{ jenkins_work_dir }}"
-    state: directory
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
-    mode:  0775
-
-- name: Ensure symlink {{ jenkins_home_dir }}/plugins to {{ jenkins_work_dir }} exists
+- name: Ensure symlink {{ jenkins_home_dir }}/plugins to {{ jenkins_plug_dir }} exists
   file:
     src:   "{{ jenkins_plug_dir }}"
     dest:  "{{ jenkins_home_dir }}/plugins"
@@ -122,6 +41,22 @@
     dest:  "{{ jenkins_home_dir }}/workspace"
     state: link
 
+# - name: Disable Upgrade wizard
+#   copy:
+#     content: "{{ jenkins_version }}"
+#     dest:    "{{ jenkins_home_dir }}/jenkins.install.UpgradeWizard.state"
+#     owner:   "{{ jenkins_user }}"
+#     group:   "{{ jenkins_group }}"
+#     mode:    0644
+
+- name: Ensure control.sh exists
+  template:
+    src:    controller.sh.j2
+    dest:   "{{ tools_dir }}/control.sh"
+    owner:  "{{ jenkins_user }}"
+    group:  "{{ jenkins_group }}"
+    mode:   0700
+
 # - name: Ensure custom init scripts directory exists
 #   file:
 #     path:  "{{ jenkins_home_dir }}/init.groovy.d"
@@ -130,26 +65,18 @@
 #     group: "{{ jenkins_group }}"
 #     mode:  0775
 
-- name: Configure proxy config for Jenkins
-  template:
-    src:    proxy.xml
-    dest:   "{{ jenkins_home_dir }}/proxy.xml"
-    owner:  "{{ jenkins_user }}"
-    group:  "{{ jenkins_group }}"
-    mode:   0664
-  register: jenkins_proxy_config
-  when:
-    - jenkins_proxy_host | length > 0
-    - jenkins_proxy_port | length > 0
+# - name: Configure proxy config for Jenkins
+#   template:
+#     src:    proxy.xml
+#     dest:   "{{ jenkins_home_dir }}/proxy.xml"
+#     owner:  "{{ jenkins_user }}"
+#     group:  "{{ jenkins_group }}"
+#     mode:   0664
+#   register: jenkins_proxy_config
+#   when:
+#     - jenkins_proxy_host | length > 0
+#     - jenkins_proxy_port | length > 0
 
-
-- name: "Ensure {{ jenkins_user }} user permission under {{ pv_root_dir }}/var"
-  file:
-    path:  "{{ pv_root_dir }}/var"
-    state: directory
-    recurse: yes
-    owner: "{{ jenkins_user }}"
-    group: "{{ jenkins_group }}"
 
 # - name: Disable Setup wizard
 #   copy:
@@ -158,11 +85,3 @@
 #     owner:   "{{ jenkins_user }}"
 #     group:   "{{ jenkins_group }}"
 #     mode:    0644
-
-- name: Disable Upgrade wizard
-  copy:
-    content: "{{ jenkins_version }}"
-    dest:    "{{ jenkins_home_dir }}/jenkins.install.UpgradeWizard.state"
-    owner:   "{{ jenkins_user }}"
-    group:   "{{ jenkins_group }}"
-    mode:    0644

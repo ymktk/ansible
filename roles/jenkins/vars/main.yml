@@ -1,6 +1,9 @@
 ---
-# roleで利用される変数を定義
 # 基本的に環境毎に変わる固定値などを記述し、group_varsなどで変数を上書しない
+jre_archive_name: OpenJDK11U-jre_x64_linux_hotspot_{{ jre_version }}.tar.gz
+jre_unarchived_dir: jdk-{{ untar_name }}-jre
+java_home: "{{ app_opt_dir }}/java"
+
 app_mount_point: /app
 app_opt_dir: "{{ app_mount_point }}/opt"
 app_var_dir: "{{ app_mount_point }}/var"
@@ -8,11 +11,22 @@ app_var_dir: "{{ app_mount_point }}/var"
 jenkins_user:  jenkins
 jenkins_group: jenkins
 
+jenkins_download_dir: "{{ app_var_dir }}/tmp/downloads/jenkins-{{ jenkins_version }}"
+jenkins_apps_dir:     "{{ app_var_dir }}/lib/webapps"
+jenkins_home_dir:     "{{ app_var_dir }}/lib/jenkins_home"
+jenkins_plug_dir:     "{{ app_var_dir }}/lib/jenkins_plugins"
+jenkins_work_dir:     "{{ app_var_dir }}/cache/workspace"
+jenkins_war_dir:      "{{ app_var_dir }}/cache/war"
+
+tools_dir: "{{ app_opt_dir }}/tools"
+
+jenkins_prefix: jenkins
+jenkins_http_port: 8080
+
+# jenkins_port_shutdown: 8180
+
+
 jenkins_download_URL: http://mirrors.jenkins.io/war-stable/
-jenkins_download_dir: "{{ app_mount_point }}/var/tmp/downloads"
-jenkins_home_dir:     "{{ app_mount_point }}/var/lib/jenkins_home"
-jenkins_plug_dir:     "{{ app_mount_point }}/var/lib/jenkins_plugins"
-jenkins_work_dir:     "{{ app_mount_point }}/var/lib/jenkins_workspace"
 
 jenkins_plugin_names:
   - "ansicolor"
@@ -135,7 +149,3 @@ jenkins_plugin_names:
   - "blueocean" # Blue Ocean
   - "envinject-api" # EnvInject API
   - "envinject"     # Environment Injector
-
-
-jre_archive_name: OpenJDK11U-jre_x64_linux_hotspot_{{ jre_version }}.tar.gz
-jre_unarchived_dir: jdk-{{ untar_name }}-jre

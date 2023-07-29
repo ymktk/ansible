@@ -4,14 +4,11 @@
 - name: Install Java
   import_tasks: install-java.yaml
 
-# - name: Transfer jenkins.war
-#   import_tasks: transfer.yml
-
 # - name: "start"
 #   debug: msg="-START-"
 
-# - name: Setup Jenkins Master
-#   import_tasks: settings.yml
+- name: Setup Jenkins Master
+  import_tasks: settings.yml
 
 # - name: Install Jenkins plugins
 #   tags: [ never, plugins ]

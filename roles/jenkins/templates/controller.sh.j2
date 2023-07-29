@@ -1,0 +1,43 @@
+#!/bin/sh
+
+export JENKINS_HOME={{ jenkins_home_dir }}
+
+JAVA_HOME={{ java_home }}
+PID_FILE_PATH={{ tools_dir }}/jenkins.pid
+
+start (){
+    echo "start"
+    echo "JENKINS_HOME: " $JENKINS_HOME
+    if [ ! -f $PID_FILE_PATH ]; then
+        $JAVA_HOME/bin/java -jar {{ jenkins_apps_dir }}/jenkins.war \
+        --webroot={{ jenkins_war_dir }} \
+        --prefix=/{{ jenkins_prefix }} \
+        --httpPort={{ jenkins_http_port }} &
+        echo $! > $PID_FILE_PATH
+        return 0
+    else
+        echo "PID is existing." $PID_FILE_PATH
+        return 0
+    fi
+}
+stop (){
+    if [ -f $PID_FILE_PATH ]; then
+        PID=$(cat $PID_FILE_PATH);
+        kill $PID
+        rm $PID_FILE_PATH
+        echo "stop"
+        return 0
+    else
+        echo "PID is not existing." $PID_FILE_PATH
+        return 0
+    fi
+}
+
+case $1 in
+start)
+    start
+;;
+stop)
+    stop
+;;
+esac
