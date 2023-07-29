@@ -20,13 +20,13 @@
     append: yes
 
 - name: Ensure dependencies are installed.
-  package:
+  ansible.builtin.apt:
     name:
       - curl
       - git
       # - libselinux-python
       # - initscripts
-    state: installed
+    state: present
 
 # - name: Stop and disable firewalld
 #   service:

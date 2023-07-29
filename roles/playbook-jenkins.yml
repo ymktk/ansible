@@ -1,6 +1,6 @@
 ---
-- hosts: jenkins
+- hosts: all
   remote_user: taka
-  become: yes
+  gather_facts: false
   roles:
     - jenkins

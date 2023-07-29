@@ -1,3 +1,10 @@
+# Apply
+
+```bash
+ansible-playbook -i inventory playbook-jenkins.yml
+```
+
+
 # References
 
 - (Module)[https://docs.ansible.com/ansible/latest/modules/modules_by_category.html]

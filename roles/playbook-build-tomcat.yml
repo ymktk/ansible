@@ -1,7 +1,0 @@
----
-- hosts: jenkins
-  remote_user: root
-  become: yes
-  roles:
-    # - java # Dependency is defined in meta/main.yml
-    - tomcat-9
