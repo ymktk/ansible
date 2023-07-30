@@ -1,8 +1,17 @@
 # Apply
 
 ```bash
+# at Ansible controller
+cd /home/taka/repos/ansible/roles/
+
 ansible-playbook -i inventory playbook-jenkins.yml
+
+
+# at jenkins
+/app/opt/tools/control.sh start
 ```
+
+* http://192.168.24.2:8080/jenkins/
 
 
 # References

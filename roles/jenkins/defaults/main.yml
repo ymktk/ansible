@@ -1,7 +1,7 @@
 ---
-# http://mirrors.jenkins.io/war-stable/2.303.3/
-jenkins_version:    "2.303.3"
-jenkins_war_sha256: "8a6ae7367755b3f31a050faa945f7a3991abdb43d941c7294cac890c1e2779d8"
+# http://mirrors.jenkins.io/war-stable/2.401.3/
+jenkins_version:    "2.401.3"
+jenkins_war_sha256: "a798a0c5481a8ffb0320d9121f6cf49dc575c369028daae17a4dd398b69e000d"
 
 # Java
 jre_version: 11.0.20_8
